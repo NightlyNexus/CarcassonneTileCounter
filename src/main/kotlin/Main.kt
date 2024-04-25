@@ -19,6 +19,7 @@ fun main() {
     riverTiles.size +
     innsAndCathedralsTiles.size +
     tradersAndBuildersTiles.size +
+    princessAndDragonTiles.size +
     flyingMachinesTiles.size +
     messengersTiles.size +
     ferriesTiles.size +
@@ -182,6 +183,16 @@ fun main() {
   addTiles(
     tradersAndBuildersTiles,
     "traders-and-builders",
+    grid,
+    allTileElements,
+    shownTilesCount,
+    tileElementListener,
+    tileStorage
+  )
+
+  addTiles(
+    princessAndDragonTiles,
+    "princess-and-dragon",
     grid,
     allTileElements,
     shownTilesCount,
@@ -1025,6 +1036,180 @@ private val tradersAndBuildersTiles = listOf(
     hasWineCastle = true,
     extra = Tile.Extra.WaterTower
   )
+)
+
+private val princessAndDragonTiles = listOf(
+  Tile(
+    "princessanddragon/Princess_And_Dragon_C2_Tile_A.jpg",
+    hasRoad = true,
+    hasCastle = true,
+    hasPrincess = true
+  ),
+  Tile(
+    "princessanddragon/Princess_And_Dragon_C2_Tile_B.jpg",
+    hasCastle = true,
+    hasPrincess = true,
+    extra = Tile.Extra.Garden
+  ),
+  Tile(
+    "princessanddragon/Princess_And_Dragon_C2_Tile_C.jpg",
+    hasCastle = true,
+    hasPrincess = true,
+    extra = Tile.Extra.WaterTower
+  ),
+  Tile(
+    "princessanddragon/Princess_And_Dragon_C2_Tile_D.jpg",
+    hasRoad = true,
+    hasCastle = true,
+    hasPrincess = true
+  ),
+  Tile(
+    "princessanddragon/Princess_And_Dragon_C2_Tile_E.jpg",
+    hasCastle = true,
+    hasPrincess = true,
+    extra = Tile.Extra.WaterTower
+  ),
+  Tile(
+    "princessanddragon/Princess_And_Dragon_C2_Tile_F.jpg",
+    hasCastle = true,
+    hasShieldCastle = true,
+    hasPrincess = true
+  ),
+  Tile(
+    "princessanddragon/Princess_And_Dragon_C2_Tile_G.jpg",
+    hasRoad = true,
+    hasDragon = true,
+    extra = Tile.Extra.Highwaymen
+  ),
+  Tile(
+    "princessanddragon/Princess_And_Dragon_C2_Tile_G.jpg",
+    hasRoad = true,
+    hasDragon = true,
+    extra = Tile.Extra.Highwaymen
+  ),
+  Tile(
+    "princessanddragon/Princess_And_Dragon_C2_Tile_H.jpg",
+    hasRoad = true,
+    hasDragon = true
+  ),
+  Tile(
+    "princessanddragon/Princess_And_Dragon_C2_Tile_I.jpg",
+    hasRoad = true,
+    hasDragon = true
+  ),
+  Tile(
+    "princessanddragon/Princess_And_Dragon_C2_Tile_J.jpg",
+    hasCastle = true,
+    hasDragon = true,
+    extra = Tile.Extra.Garden
+  ),
+  Tile(
+    "princessanddragon/Princess_And_Dragon_C2_Tile_K.jpg",
+    hasCastle = true,
+    hasDragon = true,
+    extra = Tile.Extra.DonkeyStable
+  ),
+  Tile(
+    "princessanddragon/Princess_And_Dragon_C2_Tile_L.jpg",
+    hasRoad = true,
+    hasCastle = true,
+    hasDragon = true
+  ),
+  Tile(
+    "princessanddragon/Princess_And_Dragon_C2_Tile_M.jpg",
+    hasRoad = true,
+    hasCastle = true,
+    hasDragon = true
+  ),
+  Tile(
+    "princessanddragon/Princess_And_Dragon_C2_Tile_N.jpg",
+    hasShieldCastle = true,
+    hasDragon = true
+  ),
+  Tile(
+    "princessanddragon/Princess_And_Dragon_C2_Tile_O.jpg",
+    hasCastle = true,
+    hasMonastery = true,
+    hasDragon = true
+  ),
+  Tile(
+    "princessanddragon/Princess_And_Dragon_C2_Tile_P.jpg",
+    hasRoad = true,
+    hasMonastery = true,
+    hasDragon = true
+  ),
+  Tile(
+    "princessanddragon/Princess_And_Dragon_C2_Tile_Q.jpg",
+    hasRoad = true,
+    hasCastle = true,
+    hasDragon = true
+  ),
+  Tile(
+    "princessanddragon/Princess_And_Dragon_C2_Tile_R.jpg",
+    hasRoad = true,
+    hasMagicPortal = true,
+    extra = Tile.Extra.Farmhouse
+  ),
+  Tile(
+    "princessanddragon/Princess_And_Dragon_C2_Tile_S.jpg",
+    hasCastle = true,
+    hasMagicPortal = true
+  ),
+  Tile(
+    "princessanddragon/Princess_And_Dragon_C2_Tile_T.jpg",
+    hasRoad = true,
+    hasCastle = true,
+    hasMagicPortal = true
+  ),
+  Tile(
+    "princessanddragon/Princess_And_Dragon_C2_Tile_U.jpg",
+    hasRoad = true,
+    hasCastle = true,
+    hasMagicPortal = true
+  ),
+  Tile(
+    "princessanddragon/Princess_And_Dragon_C2_Tile_V.jpg",
+    hasRoad = true,
+    hasCastle = true,
+    hasMagicPortal = true
+  ),
+  Tile(
+    "princessanddragon/Princess_And_Dragon_C2_Tile_W.jpg",
+    hasRoad = true,
+    hasMagicPortal = true,
+    extra = Tile.Extra.Highwaymen
+  ),
+  Tile(
+    "princessanddragon/Princess_And_Dragon_C2_Tile_X.jpg",
+    hasRoad = true,
+    hasVolcano = true
+  ),
+  Tile(
+    "princessanddragon/Princess_And_Dragon_C2_Tile_Y.jpg",
+    hasCastle = true,
+    hasVolcano = true
+  ),
+  Tile(
+    "princessanddragon/Princess_And_Dragon_C2_Tile_Z.jpg",
+    hasCastle = true,
+    hasVolcano = true
+  ),
+  Tile(
+    "princessanddragon/Princess_And_Dragon_C2_Tile_1.jpg",
+    hasRoad = true,
+    hasVolcano = true,
+    extra = Tile.Extra.Farmhouse
+  ),
+  Tile(
+    "princessanddragon/Princess_And_Dragon_C2_Tile_2.jpg",
+    hasVolcano = true,
+    extra = Tile.Extra.Pigsty
+  ),
+  Tile(
+    "princessanddragon/Princess_And_Dragon_C2_Tile_3.jpg",
+    hasRoad = true,
+    hasVolcano = true
+  ),
 )
 
 private val flyingMachinesTiles = listOf(

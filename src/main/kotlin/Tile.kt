@@ -10,6 +10,10 @@ internal data class Tile(
   val hasWheatCastle: Boolean = false,
   val hasClothCastle: Boolean = false,
   val hasMonastery: Boolean = false,
+  val hasPrincess: Boolean = false,
+  val hasDragon: Boolean = false,
+  val hasMagicPortal: Boolean = false,
+  val hasVolcano: Boolean = false,
   val extra: Extra = Extra.None
 ) {
   enum class Extra(val text: String) {
