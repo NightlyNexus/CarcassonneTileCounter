@@ -20,7 +20,8 @@ fun main() {
     innsAndCathedralsTiles.size +
     tradersAndBuildersTiles.size +
     flyingMachinesTiles.size +
-    messengersTiles.size
+    messengersTiles.size +
+    ferriesTiles.size
   val allTileElements = ArrayList<TileElement>(totalTileCount)
 
   val grid = document.getElementsByClassName("grid-container")[0] as HTMLDivElement
@@ -129,7 +130,7 @@ fun main() {
       shownTilesCount,
       tileElementListener
     )
-    if (tile.extra == Tile.Extra.Source) {
+    if (tile.extra === Tile.Extra.Source) {
       check(baseSourceTileElement == null)
       baseSourceTileElement = baseTileElement
     }
@@ -196,6 +197,16 @@ fun main() {
   addTiles(
     messengersTiles,
     "messengers",
+    grid,
+    allTileElements,
+    shownTilesCount,
+    tileElementListener,
+    tileStorage
+  )
+
+  addTiles(
+    ferriesTiles,
+    "ferries",
     grid,
     allTileElements,
     shownTilesCount,
@@ -324,7 +335,7 @@ private class TileElement(
       }
     }
     appendElement("figcaption") {
-      if (tile.extra == Tile.Extra.Source) {
+      if (tile.extra === Tile.Extra.Source) {
         appendElement("b") {
           appendText(Tile.Extra.Source.text)
         }
@@ -1030,5 +1041,32 @@ private val messengersTiles = listOf(
   ),
   Tile(
     "messengers/Messages_C3_Tile_H.png"
+  )
+)
+
+private val ferriesTiles = listOf(
+  Tile(
+    "ferries/Ferries_C3_Tile_01.png"
+  ),
+  Tile(
+    "ferries/Ferries_C3_Tile_01.png"
+  ),
+  Tile(
+    "ferries/Ferries_C3_Tile_01.png"
+  ),
+  Tile(
+    "ferries/Ferries_C3_Tile_02.png"
+  ),
+  Tile(
+    "ferries/Ferries_C3_Tile_02.png"
+  ),
+  Tile(
+    "ferries/Ferries_C3_Tile_02.png"
+  ),
+  Tile(
+    "ferries/Ferries_C3_Tile_03.png"
+  ),
+  Tile(
+    "ferries/Ferries_C3_Tile_03.png"
   )
 )
