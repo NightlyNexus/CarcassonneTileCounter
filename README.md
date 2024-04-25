@@ -1,4 +1,4 @@
-https://nightlynexus.github.io/carcassonnetilecounter/
+https://nightlynexus.github.io/CarcassonneTileCounter/
 
 Mark Carcassonne tiles as used as you play, so you know what's still in the deck.
 
