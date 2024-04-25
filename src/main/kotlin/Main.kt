@@ -22,7 +22,8 @@ fun main() {
     flyingMachinesTiles.size +
     messengersTiles.size +
     ferriesTiles.size +
-    goldminesTiles.size
+    goldminesTiles.size +
+    mageAndWitchTiles.size
   val allTileElements = ArrayList<TileElement>(totalTileCount)
 
   val grid = document.getElementsByClassName("grid-container")[0] as HTMLDivElement
@@ -218,6 +219,16 @@ fun main() {
   addTiles(
     goldminesTiles,
     "goldmines",
+    grid,
+    allTileElements,
+    shownTilesCount,
+    tileElementListener,
+    tileStorage
+  )
+
+  addTiles(
+    mageAndWitchTiles,
+    "mage_and_witch",
     grid,
     allTileElements,
     shownTilesCount,
@@ -1135,5 +1146,50 @@ private val goldminesTiles = listOf(
     "goldmines/Goldmines_C3_Tile_H.png",
     hasRoad = true,
     hasMonastery = true
+  )
+)
+
+private val mageAndWitchTiles = listOf(
+  Tile(
+    "mageAndWitch/Mage_And_Witch_C3_Tile_A.png",
+    hasRoad = true,
+    hasCastle = true
+  ),
+  Tile(
+    "mageAndWitch/Mage_And_Witch_C3_Tile_B.png",
+    hasRoad = true,
+    hasCastle = true
+  ),
+  Tile(
+    "mageAndWitch/Mage_And_Witch_C3_Tile_C.png",
+    hasRoad = true,
+    hasCastle = true,
+    extra = Tile.Extra.WaterTower
+  ),
+  Tile(
+    "mageAndWitch/Mage_And_Witch_C3_Tile_D.png",
+    hasCastle = true
+  ),
+  Tile(
+    "mageAndWitch/Mage_And_Witch_C3_Tile_E.png",
+    hasRoad = true,
+    hasCastle = true,
+    extra = Tile.Extra.Garden
+  ),
+  Tile(
+    "mageAndWitch/Mage_And_Witch_C3_Tile_F.png",
+    hasRoad = true,
+    hasCastle = true
+  ),
+  Tile(
+    "mageAndWitch/Mage_And_Witch_C3_Tile_G.png",
+    hasRoad = true,
+    hasCastle = true
+  ),
+  Tile(
+    "mageAndWitch/Mage_And_Witch_C3_Tile_H.png",
+    hasRoad = true,
+    hasCastle = true,
+    extra = Tile.Extra.Farmhouse
   )
 )
