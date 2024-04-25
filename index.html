@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Carcassonne Tile Counter</title>
+  <link rel="shortcut icon" href="meeple.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <style>
+    .grid-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, 140px);
+      background-color: #38AFCD;
+    }
+
+    .grid-container > figure {
+      text-align: center;
+      padding: 20px;
+      margin: 0;
+    }
+
+    body {
+      margin-top: 0;
+    }
+
+    #header { position: sticky; top: 0; z-index: 1000; padding: 20px; background-color: #FFFFFFDD }
+
+    p { display: inline; }
+
+    .expansion { display: inline-block; }
+  </style>
+</head>
+<body>
+<div id="header">
+  <p>In pile: </p><b id="in-pile-count"></b>&nbsp;&nbsp;&nbsp;&nbsp;<p>Used: </p><b id="used-count"></b>
+  <br/><br/>
+  <input type="checkbox" id="sort-used">
+  <label for="sort-used">Move used to bottom</label>&nbsp;&nbsp;&nbsp;&nbsp;<button id="reset">Reset</button>
+  <br/><br/>
+  <div class="expansion">
+    <input type="checkbox" id="base" disabled="disabled" checked="checked">
+    <label for="base">Base</label>
+  </div>
+  <div class="expansion">
+    <input type="checkbox" id="river" checked="checked">
+    <label for="river">River</label>
+  </div>
+  <div class="expansion">
+    <input type="checkbox" id="inns-and-cathedrals" checked="checked">
+    <label for="inns-and-cathedrals">Inns &amp; Cathedrals</label>
+  </div>
+  <div class="expansion">
+    <input type="checkbox" id="traders-and-builders" checked="checked">
+    <label for="traders-and-builders">Traders &amp; Builders</label>
+  </div>
+  <div class="expansion">
+    <input type="checkbox" id="flying-machines" checked="checked">
+    <label for="flying-machines">Flying Machines</label>
+  </div>
+  <div class="expansion">
+    <input type="checkbox" id="messengers" checked="checked">
+    <label for="messengers">Messengers</label>
+  </div>
+  <div class="expansion">
+    <input type="checkbox" id="ferries" checked="checked">
+    <label for="ferries">Ferries</label>
+  </div>
+  <div class="expansion">
+    <input type="checkbox" id="goldmines" checked="checked">
+    <label for="goldmines">Goldmines</label>
+  </div>
+  <div class="expansion">
+    <input type="checkbox" id="mage-and-witch" checked="checked">
+    <label for="mage-and-witch">Mage &amp; Witch</label>
+  </div>
+  <div class="expansion">
+    <input type="checkbox" id="robbers" checked="checked">
+    <label for="robbers">Robbers</label>
+  </div>
+  <div class="expansion">
+    <input type="checkbox" id="crop-circles" checked="checked">
+    <label for="crop-circles">Crop Circles</label>
+  </div>
+</div>
+<div class="grid-container">
+</div>
+<script src="CarcassonneTileCounter.js"></script>
+</body>
+</html>
