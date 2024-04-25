@@ -29,9 +29,9 @@ fun main() {
   val allTileElements = ArrayList<TileElement>(totalTileCount)
 
   val grid = document.getElementsByClassName("grid-container")[0]!!
-  val inPileCountDisplay = document.getElementById("in_pile_count")!!
-  val usedCountDisplay = document.getElementById("used_count")!!
-  val sortUsedCheckbox = document.getElementById("sort_used") as HTMLInputElement
+  val inPileCountDisplay = document.getElementById("in-pile-count")!!
+  val usedCountDisplay = document.getElementById("used-count")!!
+  val sortUsedCheckbox = document.getElementById("sort-used") as HTMLInputElement
   val resetButton = document.getElementById("reset") as HTMLButtonElement
 
   resetButton.addEventListener("click", {
@@ -171,7 +171,7 @@ fun main() {
 
   addTiles(
     innsAndCathedralsTiles,
-    "inns_and_cathedrals",
+    "inns-and-cathedrals",
     grid,
     allTileElements,
     shownTilesCount,
@@ -181,7 +181,7 @@ fun main() {
 
   addTiles(
     tradersAndBuildersTiles,
-    "traders_and_builders",
+    "traders-and-builders",
     grid,
     allTileElements,
     shownTilesCount,
@@ -191,7 +191,7 @@ fun main() {
 
   addTiles(
     flyingMachinesTiles,
-    "flying_machines",
+    "flying-machines",
     grid,
     allTileElements,
     shownTilesCount,
@@ -231,7 +231,7 @@ fun main() {
 
   addTiles(
     mageAndWitchTiles,
-    "mage_and_witch",
+    "mage-and-witch",
     grid,
     allTileElements,
     shownTilesCount,
@@ -251,7 +251,7 @@ fun main() {
 
   addTiles(
     cropCircles,
-    "crop_circles",
+    "crop-circles",
     grid,
     allTileElements,
     shownTilesCount,
