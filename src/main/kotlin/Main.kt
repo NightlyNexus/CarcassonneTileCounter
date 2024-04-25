@@ -1,6 +1,8 @@
 package com.nightlynexus
 
 import kotlinx.browser.document
+import kotlinx.browser.localStorage
+import kotlinx.browser.window
 import kotlinx.dom.appendElement
 import kotlinx.dom.appendText
 import kotlinx.dom.createElement
@@ -11,15 +13,7 @@ import org.w3c.dom.HTMLInputElement
 import org.w3c.dom.get
 
 fun main() {
-  val grid = document.getElementsByClassName("grid-container")[0] as HTMLDivElement
-  val unusedCountDisplay = document.getElementById("unused_count")!!
-  val usedCountDisplay = document.getElementById("used_count")!!
-  val sortUsedCheckbox = document.getElementById("sort_used")!!
-  val riverCheckbox = document.getElementById("river")!!
-  val innsAndCathedralsCheckbox = document.getElementById("inns_and_cathedrals")!!
-  val tradersAndBuildersCheckbox = document.getElementById("traders_and_builders")!!
-  val flyingMachinesCheckbox = document.getElementById("flying_machines")!!
-  val messengersCheckbox = document.getElementById("messengers")!!
+  val tileStorage = TileStorage(localStorage)
 
   val totalTileCount = baseTiles.size +
     riverTiles.size +
@@ -29,12 +23,26 @@ fun main() {
     messengersTiles.size
   val allTileElements = ArrayList<TileElement>(totalTileCount)
 
-  // We show every tile initially, including the 2 source tiles.
-  // We hide the base source tile and update the counts when adding all the tiles below.
-  var shownUnusedCount = totalTileCount - 2
-  var shownUsedCount = 2
-  unusedCountDisplay.textContent = shownUnusedCount.toString()
-  usedCountDisplay.textContent = shownUsedCount.toString()
+  val grid = document.getElementsByClassName("grid-container")[0] as HTMLDivElement
+  val inPileCountDisplay = document.getElementById("in_pile_count")!!
+  val usedCountDisplay = document.getElementById("used_count")!!
+  val sortUsedCheckbox = document.getElementById("sort_used") as HTMLInputElement
+  document.getElementById("reset")!!.apply {
+    addEventListener("click", {
+      if (window.confirm("Reset all tiles?")) {
+        tileStorage.resetUsed()
+        for (tileElement in allTileElements) {
+          if (tileElement.tile.extra !== Tile.Extra.Source) {
+            if (tileElement.used) {
+              tileElement.used = false
+            }
+          }
+        }
+      }
+    })
+  }
+
+  val shownTilesCount = ShownTilesCount(0, 0)
 
   val defaultComparator = Comparator<TileElement> { a, b ->
     a.ordinal - b.ordinal
@@ -57,25 +65,27 @@ fun main() {
     for (tileElement in allTileElements) {
       grid.appendChild(tileElement.element)
     }
+
+    tileStorage.setSortUsed(sortUnused)
   })
   val tileElementListener = object : TileElement.Listener {
     override fun onShowChanged(tileElement: TileElement, show: Boolean) {
       val used = tileElement.used
       if (show) {
         if (used) {
-          shownUsedCount++
+          shownTilesCount.used++
         } else {
-          shownUnusedCount++
+          shownTilesCount.inPile++
         }
       } else {
         if (used) {
-          shownUsedCount--
+          shownTilesCount.used--
         } else {
-          shownUnusedCount--
+          shownTilesCount.inPile--
         }
       }
-      unusedCountDisplay.textContent = shownUnusedCount.toString()
-      usedCountDisplay.textContent = shownUsedCount.toString()
+      inPileCountDisplay.textContent = shownTilesCount.inPile.toString()
+      usedCountDisplay.textContent = shownTilesCount.used.toString()
     }
 
     override fun onUsedChanged(tileElement: TileElement, used: Boolean) {
@@ -88,26 +98,40 @@ fun main() {
       }
       if (tileElement.show) {
         if (used) {
-          shownUnusedCount--
-          shownUsedCount++
+          shownTilesCount.inPile--
+          shownTilesCount.used++
         } else {
-          shownUnusedCount++
-          shownUsedCount--
+          shownTilesCount.inPile++
+          shownTilesCount.used--
         }
-        unusedCountDisplay.textContent = shownUnusedCount.toString()
-        usedCountDisplay.textContent = shownUsedCount.toString()
+        inPileCountDisplay.textContent = shownTilesCount.inPile.toString()
+        usedCountDisplay.textContent = shownTilesCount.used.toString()
       }
+
+      tileStorage.setUsed(tileElement.ordinal, used)
     }
   }
 
+  val riverCheckboxElementId = "river"
+  val showRiver = tileStorage.getShownStart(riverCheckboxElementId)
+
   var baseSourceTileElement: TileElement? = null
   for (tile in baseTiles) {
-    val baseTileElement = grid.addTile(tile, allTileElements.size, tileElementListener).apply {
-      if (tile.extra == Tile.Extra.Source) {
-        check(baseSourceTileElement == null)
-        baseSourceTileElement = this
-        show = false
-      }
+    val ordinal = allTileElements.size
+    val isSource = tile.extra === Tile.Extra.Source
+    val show = !isSource || !showRiver
+    val used = isSource || tileStorage.getUsedStart(ordinal)
+    val baseTileElement = grid.addTile(
+      tile,
+      ordinal,
+      show,
+      used,
+      shownTilesCount,
+      tileElementListener
+    )
+    if (tile.extra == Tile.Extra.Source) {
+      check(baseSourceTileElement == null)
+      baseSourceTileElement = baseTileElement
     }
     allTileElements += baseTileElement
   }
@@ -115,14 +139,25 @@ fun main() {
 
   val riverTileElements = ArrayList<TileElement>(riverTiles.size)
   for (tile in riverTiles) {
-    val riverTileElement = grid.addTile(tile, allTileElements.size, tileElementListener)
+    val ordinal = allTileElements.size
+    val isSource = tile.extra === Tile.Extra.Source
+    val used = isSource || tileStorage.getUsedStart(ordinal)
+    val riverTileElement = grid.addTile(
+      tile,
+      ordinal,
+      showRiver,
+      used,
+      shownTilesCount,
+      tileElementListener
+    )
     riverTileElements += riverTileElement
     allTileElements += riverTileElement
   }
 
+  val riverCheckbox = document.getElementById(riverCheckboxElementId) as HTMLInputElement
   riverCheckbox.addEventListener("change", {
     val checked = (it.target as HTMLInputElement).checked
-    baseSourceTileElement!!.show = !checked
+    baseSourceTileElement.show = !checked
     for (tileElement in riverTileElements) {
       tileElement.show = checked
     }
@@ -130,104 +165,161 @@ fun main() {
 
   addTiles(
     innsAndCathedralsTiles,
-    innsAndCathedralsCheckbox,
+    "inns_and_cathedrals",
     grid,
     allTileElements,
-    tileElementListener
+    shownTilesCount,
+    tileElementListener,
+    tileStorage
   )
 
   addTiles(
     tradersAndBuildersTiles,
-    tradersAndBuildersCheckbox,
+    "traders_and_builders",
     grid,
     allTileElements,
-    tileElementListener
+    shownTilesCount,
+    tileElementListener,
+    tileStorage
   )
 
   addTiles(
     flyingMachinesTiles,
-    flyingMachinesCheckbox,
+    "flying_machines",
     grid,
     allTileElements,
-    tileElementListener
+    shownTilesCount,
+    tileElementListener,
+    tileStorage
   )
 
   addTiles(
     messengersTiles,
-    messengersCheckbox,
+    "messengers",
     grid,
     allTileElements,
-    tileElementListener
+    shownTilesCount,
+    tileElementListener,
+    tileStorage
   )
+
+  inPileCountDisplay.textContent = shownTilesCount.inPile.toString()
+  usedCountDisplay.textContent = shownTilesCount.used.toString()
+
+  sortUsedCheckbox.checked = tileStorage.getSortUsedStart()
 }
+
+private class ShownTilesCount(var inPile: Int, var used: Int)
 
 private fun addTiles(
   tiles: List<Tile>,
-  checkboxElement: Element,
+  checkboxElementId: String,
   grid: HTMLDivElement,
   allTileElements: MutableList<TileElement>,
-  tileElementListener: TileElement.Listener
+  shownTilesCount: ShownTilesCount,
+  tileElementListener: TileElement.Listener,
+  tileStorage: TileStorage
 ) {
+  val show = tileStorage.getShownStart(checkboxElementId)
   val tileElements = ArrayList<TileElement>(tiles.size)
   for (tile in tiles) {
-    val messengersTileElement = grid.addTile(tile, allTileElements.size, tileElementListener)
+    val ordinal = allTileElements.size
+    val used = tileStorage.getUsedStart(ordinal)
+    val messengersTileElement = grid.addTile(
+      tile,
+      ordinal,
+      show,
+      used,
+      shownTilesCount,
+      tileElementListener
+    )
     tileElements += messengersTileElement
     allTileElements += messengersTileElement
   }
-
+  val checkboxElement = document.getElementById(checkboxElementId) as HTMLInputElement
+  checkboxElement.checked = show
   checkboxElement.addEventListener("change", {
     val checked = (it.target as HTMLInputElement).checked
     for (tileElement in tileElements) {
       tileElement.show = checked
     }
+
+    tileStorage.setShown(checkboxElementId, checked)
   })
 }
 
 private fun HTMLDivElement.addTile(
   tile: Tile,
   ordinal: Int,
+  show: Boolean,
+  used: Boolean,
+  shownTilesCount: ShownTilesCount,
   listener: TileElement.Listener
 ): TileElement {
-  return TileElement(tile, ownerDocument!!, ordinal, listener).also { appendChild(it.element) }
+  if (show) {
+    if (used) {
+      shownTilesCount.used++
+    } else {
+      shownTilesCount.inPile++
+    }
+  }
+  return TileElement(
+    tile,
+    ownerDocument!!,
+    ordinal,
+    show,
+    used,
+    listener
+  ).also { appendChild(it.element) }
 }
 
 private class TileElement(
   val tile: Tile,
   ownerDocument: Document,
   val ordinal: Int,
-  private val listener: Listener
+  show: Boolean,
+  used: Boolean,
+  private val listener: Listener,
 ) {
   interface Listener {
     fun onShowChanged(tileElement: TileElement, show: Boolean)
     fun onUsedChanged(tileElement: TileElement, used: Boolean)
   }
 
-  var show = true
+  var show = show
     set(value) {
+      check(value != field)
       field = value
       val display = if (value) "initial" else "none"
       element.setAttribute("style", "display: $display;")
       listener.onShowChanged(this, value)
     }
-  var used = tile.extra == Tile.Extra.Source
-    private set
+  var used = used
+    set(value) {
+      check(value != field)
+      field = value
+      val grayscale = if (value) "100%" else "0%"
+      imageElement.setAttribute("style", "filter: grayscale($grayscale);")
+      listener.onUsedChanged(this, value)
+    }
+
+  // This is a val, but createElement doesn't have a Kotlin contract
+  // to promise the compiler the capture is run once.
+  private var imageElement: Element
 
   val element = ownerDocument.createElement("figure") {
-    appendElement("img") {
+    val display = if (show) "initial" else "none"
+    setAttribute("style", "display: $display;")
+
+    imageElement = appendElement("img") {
       setAttribute("src", tile.path)
-      if (tile.extra == Tile.Extra.Source) {
-        setAttribute("style", "filter: grayscale(100%);")
-      } else {
+
+      val grayscale = if (this@TileElement.used) "100%" else "0%"
+      setAttribute("style", "filter: grayscale($grayscale);")
+
+      if (tile.extra !== Tile.Extra.Source) {
         addEventListener("click", {
-          val grayscale = if (used) {
-            used = false
-            "0%"
-          } else {
-            used = true
-            "100%"
-          }
-          setAttribute("style", "filter: grayscale($grayscale);")
-          listener.onUsedChanged(this@TileElement, used)
+          this@TileElement.used = !this@TileElement.used
         })
       }
     }
