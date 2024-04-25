@@ -225,7 +225,7 @@ private fun addTiles(
   for (tile in tiles) {
     val ordinal = allTileElements.size
     val used = tileStorage.getUsedStart(ordinal)
-    val messengersTileElement = grid.addTile(
+    val tileElement = grid.addTile(
       tile,
       ordinal,
       show,
@@ -233,8 +233,8 @@ private fun addTiles(
       shownTilesCount,
       tileElementListener
     )
-    tileElements += messengersTileElement
-    allTileElements += messengersTileElement
+    tileElements += tileElement
+    allTileElements += tileElement
   }
   val checkboxElement = document.getElementById(checkboxElementId) as HTMLInputElement
   checkboxElement.checked = show
