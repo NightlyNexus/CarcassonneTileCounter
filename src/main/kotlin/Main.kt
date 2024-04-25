@@ -21,7 +21,8 @@ fun main() {
     tradersAndBuildersTiles.size +
     flyingMachinesTiles.size +
     messengersTiles.size +
-    ferriesTiles.size
+    ferriesTiles.size +
+    goldminesTiles.size
   val allTileElements = ArrayList<TileElement>(totalTileCount)
 
   val grid = document.getElementsByClassName("grid-container")[0] as HTMLDivElement
@@ -207,6 +208,16 @@ fun main() {
   addTiles(
     ferriesTiles,
     "ferries",
+    grid,
+    allTileElements,
+    shownTilesCount,
+    tileElementListener,
+    tileStorage
+  )
+
+  addTiles(
+    goldminesTiles,
+    "goldmines",
     grid,
     allTileElements,
     shownTilesCount,
@@ -1046,27 +1057,83 @@ private val messengersTiles = listOf(
 
 private val ferriesTiles = listOf(
   Tile(
-    "ferries/Ferries_C3_Tile_01.png"
+    "ferries/Ferries_C3_Tile_01.png",
+    hasRoad = true,
+    hasCastle = true
   ),
   Tile(
-    "ferries/Ferries_C3_Tile_01.png"
+    "ferries/Ferries_C3_Tile_01.png",
+    hasRoad = true,
+    hasCastle = true
   ),
   Tile(
-    "ferries/Ferries_C3_Tile_01.png"
+    "ferries/Ferries_C3_Tile_01.png",
+    hasRoad = true,
+    hasCastle = true
   ),
   Tile(
-    "ferries/Ferries_C3_Tile_02.png"
+    "ferries/Ferries_C3_Tile_02.png",
+    hasRoad = true
   ),
   Tile(
-    "ferries/Ferries_C3_Tile_02.png"
+    "ferries/Ferries_C3_Tile_02.png",
+    hasRoad = true
   ),
   Tile(
-    "ferries/Ferries_C3_Tile_02.png"
+    "ferries/Ferries_C3_Tile_02.png",
+    hasRoad = true
   ),
   Tile(
-    "ferries/Ferries_C3_Tile_03.png"
+    "ferries/Ferries_C3_Tile_03.png",
+    hasRoad = true
   ),
   Tile(
-    "ferries/Ferries_C3_Tile_03.png"
+    "ferries/Ferries_C3_Tile_03.png",
+    hasRoad = true
+  )
+)
+
+private val goldminesTiles = listOf(
+  Tile(
+    "goldmines/Goldmines_C3_Tile_A.png",
+    hasRoad = true,
+    extra = Tile.Extra.Cowshed
+  ),
+  Tile(
+    "goldmines/Goldmines_C3_Tile_B.png",
+    hasRoad = true,
+    hasCastle = true,
+    extra = Tile.Extra.WaterTower
+  ),
+  Tile(
+    "goldmines/Goldmines_C3_Tile_C.png",
+    hasRoad = true,
+    hasCastle = true,
+    hasMonastery = true
+  ),
+  Tile(
+    "goldmines/Goldmines_C3_Tile_D.png",
+    hasRoad = true,
+    hasCastle = true
+  ),
+  Tile(
+    "goldmines/Goldmines_C3_Tile_E.png",
+    hasRoad = true,
+    hasMonastery = true
+  ),
+  Tile(
+    "goldmines/Goldmines_C3_Tile_F.png",
+    hasRoad = true,
+    extra = Tile.Extra.Highwaymen
+  ),
+  Tile(
+    "goldmines/Goldmines_C3_Tile_G.png",
+    hasCastle = true,
+    hasMonastery = true
+  ),
+  Tile(
+    "goldmines/Goldmines_C3_Tile_H.png",
+    hasRoad = true,
+    hasMonastery = true
   )
 )
