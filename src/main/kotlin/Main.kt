@@ -23,7 +23,8 @@ fun main() {
     ferriesTiles.size +
     goldminesTiles.size +
     mageAndWitchTiles.size +
-    robbersTiles.size
+    robbersTiles.size +
+    cropCircles.size
   val allTileElements = ArrayList<TileElement>(totalTileCount)
 
   val grid = document.getElementsByClassName("grid-container")[0]!!
@@ -239,6 +240,16 @@ fun main() {
   addTiles(
     robbersTiles,
     "robbers",
+    grid,
+    allTileElements,
+    shownTilesCount,
+    tileElementListener,
+    tileStorage
+  )
+
+  addTiles(
+    cropCircles,
+    "crop_circles",
     grid,
     allTileElements,
     shownTilesCount,
@@ -1240,5 +1251,35 @@ private val robbersTiles = listOf(
     "robbers/Robbers_C3_Tile_H.png",
     hasCastle = true,
     extra = Tile.Extra.WaterTower
+  )
+)
+
+private val cropCircles = listOf(
+  Tile(
+    "cropcircles/Crop_Circles_C3_Tile_A.png",
+    hasRoad = true
+  ),
+  Tile(
+    "cropcircles/Crop_Circles_C3_Tile_B.png",
+    hasRoad = true
+  ),
+  Tile(
+    "cropcircles/Crop_Circles_C3_Tile_C.png",
+    hasRoad = true,
+    hasCastle = true,
+    extra = Tile.Extra.Farmhouse
+  ),
+  Tile(
+    "cropcircles/Crop_Circles_C3_Tile_D.png",
+    hasRoad = true,
+    hasCastle = true
+  ),
+  Tile(
+    "cropcircles/Crop_Circles_C3_Tile_E.png",
+    hasCastle = true
+  ),
+  Tile(
+    "cropcircles/Crop_Circles_C3_Tile_F.png",
+    hasCastle = true
   )
 )
