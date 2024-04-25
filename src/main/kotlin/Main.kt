@@ -36,7 +36,6 @@ fun main() {
 
   resetButton.addEventListener("click", {
     if (window.confirm("Reset all tiles?")) {
-      tileStorage.resetUsed()
       for (tileElement in allTileElements) {
         if (tileElement.tile.extra !== Tile.Extra.Source) {
           if (tileElement.used) {

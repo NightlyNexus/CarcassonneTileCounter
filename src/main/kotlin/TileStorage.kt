@@ -45,13 +45,4 @@ internal class TileStorage(private val storage: Storage) {
   fun setSortUsed(sortUnused: Boolean) {
     storage["sort_used"] = sortUnused.toString()
   }
-
-  fun resetUsed() {
-    for (i in 0 until storage.length) {
-      val key = storage.key(i)
-      if (key != null && key.startsWith("used_")) {
-        storage.removeItem(key)
-      }
-    }
-  }
 }
