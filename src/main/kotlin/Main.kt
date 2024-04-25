@@ -8,6 +8,7 @@ import kotlinx.dom.appendText
 import kotlinx.dom.createElement
 import org.w3c.dom.Document
 import org.w3c.dom.Element
+import org.w3c.dom.HTMLButtonElement
 import org.w3c.dom.HTMLInputElement
 import org.w3c.dom.get
 
@@ -31,20 +32,20 @@ fun main() {
   val inPileCountDisplay = document.getElementById("in_pile_count")!!
   val usedCountDisplay = document.getElementById("used_count")!!
   val sortUsedCheckbox = document.getElementById("sort_used") as HTMLInputElement
-  document.getElementById("reset")!!.apply {
-    addEventListener("click", {
-      if (window.confirm("Reset all tiles?")) {
-        tileStorage.resetUsed()
-        for (tileElement in allTileElements) {
-          if (tileElement.tile.extra !== Tile.Extra.Source) {
-            if (tileElement.used) {
-              tileElement.used = false
-            }
+  val resetButton = document.getElementById("reset") as HTMLButtonElement
+
+  resetButton.addEventListener("click", {
+    if (window.confirm("Reset all tiles?")) {
+      tileStorage.resetUsed()
+      for (tileElement in allTileElements) {
+        if (tileElement.tile.extra !== Tile.Extra.Source) {
+          if (tileElement.used) {
+            tileElement.used = false
           }
         }
       }
-    })
-  }
+    }
+  })
 
   val shownTilesCount = ShownTilesCount(0, 0)
 
@@ -111,6 +112,8 @@ fun main() {
         inPileCountDisplay.textContent = shownTilesCount.inPile.toString()
         usedCountDisplay.textContent = shownTilesCount.used.toString()
       }
+
+      resetButton.disabled = shownTilesCount.used == 1
 
       tileStorage.setUsed(tileElement.ordinal, used)
     }
@@ -259,6 +262,8 @@ fun main() {
 
   inPileCountDisplay.textContent = shownTilesCount.inPile.toString()
   usedCountDisplay.textContent = shownTilesCount.used.toString()
+
+  resetButton.disabled = shownTilesCount.used == 1
 
   sortUsedCheckbox.checked = tileStorage.getSortUsedStart()
 }
