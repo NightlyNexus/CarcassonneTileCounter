@@ -8,7 +8,6 @@ import kotlinx.dom.appendText
 import kotlinx.dom.createElement
 import org.w3c.dom.Document
 import org.w3c.dom.Element
-import org.w3c.dom.HTMLDivElement
 import org.w3c.dom.HTMLInputElement
 import org.w3c.dom.get
 
@@ -27,7 +26,7 @@ fun main() {
     robbersTiles.size
   val allTileElements = ArrayList<TileElement>(totalTileCount)
 
-  val grid = document.getElementsByClassName("grid-container")[0] as HTMLDivElement
+  val grid = document.getElementsByClassName("grid-container")[0]!!
   val inPileCountDisplay = document.getElementById("in_pile_count")!!
   val usedCountDisplay = document.getElementById("used_count")!!
   val sortUsedCheckbox = document.getElementById("sort_used") as HTMLInputElement
@@ -258,7 +257,7 @@ private class ShownTilesCount(var inPile: Int, var used: Int)
 private fun addTiles(
   tiles: List<Tile>,
   checkboxElementId: String,
-  grid: HTMLDivElement,
+  grid: Element,
   allTileElements: MutableList<TileElement>,
   shownTilesCount: ShownTilesCount,
   tileElementListener: TileElement.Listener,
@@ -292,7 +291,7 @@ private fun addTiles(
   })
 }
 
-private fun HTMLDivElement.addTile(
+private fun Element.addTile(
   tile: Tile,
   ordinal: Int,
   show: Boolean,
