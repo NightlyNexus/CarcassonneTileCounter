@@ -10,12 +10,23 @@
       display: grid;
       grid-template-columns: repeat(auto-fill, 140px);
       background-color: #38AFCD;
+      padding: 20px;
+      grid-row-gap: 20px;
     }
 
     .grid-container > figure {
       text-align: center;
-      padding: 20px;
       margin: 0;
+    }
+
+    @media screen and (max-width: 632px) {
+      .grid-container {
+        grid-template-columns: repeat(4, 1fr);
+      }
+
+      .grid-container > figure > img {
+        width: calc(110 / 142 * 100%);
+      }
     }
 
     body {
