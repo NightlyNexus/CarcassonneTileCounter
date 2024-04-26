@@ -1361,43 +1361,43 @@ private val goldminesTiles = listOf(
 
 private val mageAndWitchTiles = listOf(
   Tile(
-    "mageAndWitch/Mage_And_Witch_C3_Tile_A.png",
+    "mageandwitch/Mage_And_Witch_C3_Tile_A.png",
     hasRoad = true,
     hasCastle = true
   ),
   Tile(
-    "mageAndWitch/Mage_And_Witch_C3_Tile_B.png",
+    "mageandwitch/Mage_And_Witch_C3_Tile_B.png",
     hasRoad = true,
     hasCastle = true
   ),
   Tile(
-    "mageAndWitch/Mage_And_Witch_C3_Tile_C.png",
+    "mageandwitch/Mage_And_Witch_C3_Tile_C.png",
     hasRoad = true,
     hasCastle = true,
     extra = Tile.Extra.WaterTower
   ),
   Tile(
-    "mageAndWitch/Mage_And_Witch_C3_Tile_D.png",
+    "mageandwitch/Mage_And_Witch_C3_Tile_D.png",
     hasCastle = true
   ),
   Tile(
-    "mageAndWitch/Mage_And_Witch_C3_Tile_E.png",
+    "mageandwitch/Mage_And_Witch_C3_Tile_E.png",
     hasRoad = true,
     hasCastle = true,
     extra = Tile.Extra.Garden
   ),
   Tile(
-    "mageAndWitch/Mage_And_Witch_C3_Tile_F.png",
+    "mageandwitch/Mage_And_Witch_C3_Tile_F.png",
     hasRoad = true,
     hasCastle = true
   ),
   Tile(
-    "mageAndWitch/Mage_And_Witch_C3_Tile_G.png",
+    "mageandwitch/Mage_And_Witch_C3_Tile_G.png",
     hasRoad = true,
     hasCastle = true
   ),
   Tile(
-    "mageAndWitch/Mage_And_Witch_C3_Tile_H.png",
+    "mageandwitch/Mage_And_Witch_C3_Tile_H.png",
     hasRoad = true,
     hasCastle = true,
     extra = Tile.Extra.Farmhouse
