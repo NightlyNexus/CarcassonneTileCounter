@@ -345,7 +345,7 @@ private fun Element.addTile(
     show,
     used,
     listener
-  ).also { appendChild(it.element) }
+  )
 }
 
 private class TileElement(
