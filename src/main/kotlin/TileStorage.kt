@@ -30,8 +30,8 @@ internal class TileStorage(private val storage: Storage) {
 
   fun getSortUsedStart(): Boolean {
     if (!isCurrentVersion) return false
-    val sortUnused = storage["sort_used"] ?: return false
-    return sortUnused.toBoolean()
+    val sortUsed = storage["sort_used"] ?: return false
+    return sortUsed.toBoolean()
   }
 
   fun setShown(checkboxElementId: String, checked: Boolean) {
@@ -42,7 +42,7 @@ internal class TileStorage(private val storage: Storage) {
     storage["used_$ordinal"] = used.toString()
   }
 
-  fun setSortUsed(sortUnused: Boolean) {
-    storage["sort_used"] = sortUnused.toString()
+  fun setSortUsed(sortUsed: Boolean) {
+    storage["sort_used"] = sortUsed.toString()
   }
 }

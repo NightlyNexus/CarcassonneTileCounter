@@ -52,7 +52,7 @@ fun main() {
   val defaultComparator = Comparator<TileElement> { a, b ->
     a.ordinal - b.ordinal
   }
-  val sortUnusedComparator = Comparator<TileElement> { a, b ->
+  val sortUsedComparator = Comparator<TileElement> { a, b ->
     if (a.used && !b.used) {
       1
     } else if (!a.used && b.used) {
@@ -62,16 +62,16 @@ fun main() {
     }
   }
 
-  var sortUnused = false
+  var sortUsed = tileStorage.getSortUsedStart()
   sortUsedCheckbox.addEventListener("change", {
-    sortUnused = (it.target as HTMLInputElement).checked
-    allTileElements.sortWith(if (sortUnused) sortUnusedComparator else defaultComparator)
+    sortUsed = (it.target as HTMLInputElement).checked
+    allTileElements.sortWith(if (sortUsed) sortUsedComparator else defaultComparator)
     grid.innerHTML = ""
     for (tileElement in allTileElements) {
       grid.appendChild(tileElement.element)
     }
 
-    tileStorage.setSortUsed(sortUnused)
+    tileStorage.setSortUsed(sortUsed)
   })
   val tileElementListener = object : TileElement.Listener {
     override fun onShowChanged(tileElement: TileElement, show: Boolean) {
@@ -94,8 +94,8 @@ fun main() {
     }
 
     override fun onUsedChanged(tileElement: TileElement, used: Boolean) {
-      if (sortUnused) {
-        allTileElements.sortWith(sortUnusedComparator)
+      if (sortUsed) {
+        allTileElements.sortWith(sortUsedComparator)
         grid.innerHTML = ""
         for (tileElementToAppend in allTileElements) {
           grid.appendChild(tileElementToAppend.element)
@@ -275,7 +275,13 @@ fun main() {
 
   resetButton.disabled = shownTilesCount.used == 1
 
-  sortUsedCheckbox.checked = tileStorage.getSortUsedStart()
+  // This does not call sortUsedCheckbox's change event listener, so we have to do an initial sort.
+  sortUsedCheckbox.checked = sortUsed
+  allTileElements.sortWith(if (sortUsed) sortUsedComparator else defaultComparator)
+  grid.innerHTML = ""
+  for (tileElement in allTileElements) {
+    grid.appendChild(tileElement.element)
+  }
 }
 
 private class ShownTilesCount(var inPile: Int, var used: Int)
