@@ -6,10 +6,15 @@
   <link rel="shortcut icon" href="meeple.png">
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <style>
+    :root {
+      color-scheme: light only;
+    }
+
     .grid-container {
       display: grid;
       grid-template-columns: repeat(auto-fill, 140px);
       background-color: #38AFCD;
+      color: #000000;
       padding-top: 20px;
       padding-right: 28px;
       padding-bottom: 20px;
@@ -20,6 +25,36 @@
     .grid-container > figure {
       text-align: center;
       margin: 0;
+    }
+
+    body {
+      margin: 0;
+    }
+
+    #header {
+      position: sticky;
+      top: 0; z-index: 1000;
+      padding-top: 20px;
+      padding-right: 28px;
+      padding-bottom: 20px;
+      padding-left: 28px;
+      background-color: #FFFFFFDD;
+      color: #000000;
+    }
+
+    p {
+      display: inline;
+    }
+
+    .expansion {
+      display: inline-block;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      #header {
+        background-color: #000000DD;
+        color: #FFFFFF;
+      }
     }
 
     @media screen and (max-width: 632px) {
@@ -35,24 +70,6 @@
         font-size: 2.5vw;
       }
     }
-
-    body {
-      margin: 0;
-    }
-
-    #header {
-      position: sticky;
-      top: 0; z-index: 1000;
-      padding-top: 20px;
-      padding-right: 28px;
-      padding-bottom: 20px;
-      padding-left: 28px;
-      background-color: #FFFFFFDD
-    }
-
-    p { display: inline; }
-
-    .expansion { display: inline-block; }
   </style>
 </head>
 <body>
