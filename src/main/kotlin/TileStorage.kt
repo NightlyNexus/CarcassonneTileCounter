@@ -5,7 +5,7 @@ import org.w3c.dom.get
 import org.w3c.dom.set
 
 internal class TileStorage(private val storage: Storage) {
-  private val currentVersion = "1"
+  private val currentVersion = "2"
   private val isCurrentVersion = run {
     val version = storage["version"]
     if (version == null || version != currentVersion) {
@@ -34,6 +34,12 @@ internal class TileStorage(private val storage: Storage) {
     return sortUsed.toBoolean()
   }
 
+  fun getMessengerTileOrdinalOrder(default: List<Int>): List<Int> {
+    if (!isCurrentVersion) return default
+    val encodedOrder = storage["messenger_tile_ordinal_order"] ?: return default
+    return encodedOrder.decodeIntList()
+  }
+
   fun setShown(checkboxElementId: String, checked: Boolean) {
     storage[checkboxElementId] = checked.toString()
   }
@@ -44,5 +50,36 @@ internal class TileStorage(private val storage: Storage) {
 
   fun setSortUsed(sortUsed: Boolean) {
     storage["sort_used"] = sortUsed.toString()
+  }
+
+  fun setMessengerTileOrdinalOrder(ordinals: List<Int>) {
+    storage["messenger_tile_ordinal_order"] = ordinals.encode()
+  }
+
+  private fun List<Int>.encode(): String {
+    val builder = StringBuilder()
+    for (int in this) {
+      builder
+        .append(int)
+        .append(',')
+    }
+    if (isNotEmpty()) {
+      builder.setLength(builder.length - 1)
+    }
+    return builder.toString()
+  }
+
+  private fun String.decodeIntList(): List<Int> {
+    return split(',').map { it.toInt() }
+  }
+
+  private fun <T> sortByPositions(list: MutableList<T>, positions: List<Int>) {
+    require(list.size == positions.size)
+    val result = ArrayList<T>(list.size)
+    for (position in positions) {
+      result += list[position]
+    }
+    list.clear()
+    list += result
   }
 }
