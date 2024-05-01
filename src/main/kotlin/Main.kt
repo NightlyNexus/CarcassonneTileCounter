@@ -128,6 +128,7 @@ fun main() {
       messengerTileElements.sortBy {
         it.ordinal
       }
+      resetButton.disabled = true
       for (i in 0 until messengersTilesSize) {
         grid.insertBefore(messengerTileElements[i].element, firstChild)
       }
