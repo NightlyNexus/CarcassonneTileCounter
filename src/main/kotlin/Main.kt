@@ -161,12 +161,15 @@ fun main() {
   }
 
   val riverCheckbox = document.getElementById(riverCheckboxElementId) as HTMLInputElement
+  riverCheckbox.checked = showRiver
   riverCheckbox.addEventListener("change", {
     val checked = (it.target as HTMLInputElement).checked
     baseSourceTileElement.show = !checked
     for (tileElement in riverTileElements) {
       tileElement.show = checked
     }
+
+    tileStorage.setShown(riverCheckboxElementId, checked)
   })
 
   addTiles(
