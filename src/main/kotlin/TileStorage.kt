@@ -5,7 +5,7 @@ import org.w3c.dom.get
 import org.w3c.dom.set
 
 internal class TileStorage(private val storage: Storage) {
-  private val currentVersion = "1.0099999999900001"
+  private val currentVersion = "2"
   private val isCurrentVersion = run {
     val version = storage["version"]
     if (version == null || version != currentVersion) {
