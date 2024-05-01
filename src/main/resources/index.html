@@ -10,7 +10,7 @@
       color-scheme: light only;
     }
 
-    .grid-container {
+    #grid-container {
       display: grid;
       grid-template-columns: repeat(auto-fill, 140px);
       background-color: #38AFCD;
@@ -22,7 +22,7 @@
       grid-row-gap: 20px;
     }
 
-    .grid-container > figure {
+    #grid-container > figure {
       text-align: center;
       margin: 0;
     }
@@ -58,16 +58,16 @@
     }
 
     @media screen and (max-width: 632px) {
-      .grid-container {
+      #grid-container {
         grid-template-columns: repeat(4, 1fr);
       }
 
-      .grid-container > figure > img {
-        width: calc(110 / 142 * 100%);
+      #grid-container > figure {
+        font-size: 2.5vw;
       }
 
-      .grid-container > figure {
-        font-size: 2.5vw;
+      #grid-container > figure > img {
+        width: calc(110 / 142 * 100%);
       }
     }
   </style>
@@ -128,8 +128,7 @@
     <label for="crop-circles">Crop Circles</label>
   </div>
 </div>
-<div class="grid-container">
-</div>
+<div id="grid-container"></div>
 <script src="CarcassonneTileCounter.js"></script>
 </body>
 </html>

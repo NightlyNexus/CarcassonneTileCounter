@@ -10,7 +10,6 @@ import org.w3c.dom.Document
 import org.w3c.dom.Element
 import org.w3c.dom.HTMLButtonElement
 import org.w3c.dom.HTMLInputElement
-import org.w3c.dom.get
 
 fun main() {
   val tileStorage = TileStorage(localStorage)
@@ -29,7 +28,7 @@ fun main() {
     cropCircles.size
   val allTileElements = ArrayList<TileElement>(totalTileCount)
 
-  val grid = document.getElementsByClassName("grid-container")[0]!!
+  val grid = document.getElementById("grid-container")!!
   val inPileCountDisplay = document.getElementById("in-pile-count")!!
   val usedCountDisplay = document.getElementById("used-count")!!
   val sortUsedCheckbox = document.getElementById("sort-used") as HTMLInputElement
