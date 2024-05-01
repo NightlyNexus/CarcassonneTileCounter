@@ -127,7 +127,7 @@ fun main() {
     val isSource = tile.extra === Tile.Extra.Source
     val show = !isSource || !showRiver
     val used = isSource || tileStorage.getUsedStart(ordinal)
-    val baseTileElement = grid.addTile(
+    val baseTileElement = grid.createTile(
       tile,
       ordinal,
       show,
@@ -148,7 +148,7 @@ fun main() {
     val ordinal = allTileElements.size
     val isSource = tile.extra === Tile.Extra.Source
     val used = isSource || tileStorage.getUsedStart(ordinal)
-    val riverTileElement = grid.addTile(
+    val riverTileElement = grid.createTile(
       tile,
       ordinal,
       showRiver,
@@ -172,7 +172,7 @@ fun main() {
     tileStorage.setShown(riverCheckboxElementId, checked)
   })
 
-  addTiles(
+  document.createTiles(
     innsAndCathedralsTiles,
     "inns-and-cathedrals",
     grid,
@@ -182,7 +182,7 @@ fun main() {
     tileStorage
   )
 
-  addTiles(
+  document.createTiles(
     tradersAndBuildersTiles,
     "traders-and-builders",
     grid,
@@ -192,7 +192,7 @@ fun main() {
     tileStorage
   )
 
-  addTiles(
+  document.createTiles(
     princessAndDragonTiles,
     "princess-and-dragon",
     grid,
@@ -202,7 +202,7 @@ fun main() {
     tileStorage
   )
 
-  addTiles(
+  document.createTiles(
     flyingMachinesTiles,
     "flying-machines",
     grid,
@@ -212,7 +212,7 @@ fun main() {
     tileStorage
   )
 
-  addTiles(
+  document.createTiles(
     messengersTiles,
     "messengers",
     grid,
@@ -222,7 +222,7 @@ fun main() {
     tileStorage
   )
 
-  addTiles(
+  document.createTiles(
     ferriesTiles,
     "ferries",
     grid,
@@ -232,7 +232,7 @@ fun main() {
     tileStorage
   )
 
-  addTiles(
+  document.createTiles(
     goldminesTiles,
     "goldmines",
     grid,
@@ -242,7 +242,7 @@ fun main() {
     tileStorage
   )
 
-  addTiles(
+  document.createTiles(
     mageAndWitchTiles,
     "mage-and-witch",
     grid,
@@ -252,7 +252,7 @@ fun main() {
     tileStorage
   )
 
-  addTiles(
+  document.createTiles(
     robbersTiles,
     "robbers",
     grid,
@@ -262,7 +262,7 @@ fun main() {
     tileStorage
   )
 
-  addTiles(
+  document.createTiles(
     cropCircles,
     "crop-circles",
     grid,
@@ -288,7 +288,7 @@ fun main() {
 
 private class ShownTilesCount(var inPile: Int, var used: Int)
 
-private fun addTiles(
+private fun Document.createTiles(
   tiles: List<Tile>,
   checkboxElementId: String,
   grid: Element,
@@ -302,7 +302,7 @@ private fun addTiles(
   for (tile in tiles) {
     val ordinal = allTileElements.size
     val used = tileStorage.getUsedStart(ordinal)
-    val tileElement = grid.addTile(
+    val tileElement = grid.createTile(
       tile,
       ordinal,
       show,
@@ -313,7 +313,7 @@ private fun addTiles(
     tileElements += tileElement
     allTileElements += tileElement
   }
-  val checkboxElement = document.getElementById(checkboxElementId) as HTMLInputElement
+  val checkboxElement = getElementById(checkboxElementId) as HTMLInputElement
   checkboxElement.checked = show
   checkboxElement.addEventListener("change", {
     val checked = (it.target as HTMLInputElement).checked
@@ -325,7 +325,7 @@ private fun addTiles(
   })
 }
 
-private fun Element.addTile(
+private fun Element.createTile(
   tile: Tile,
   ordinal: Int,
   show: Boolean,
