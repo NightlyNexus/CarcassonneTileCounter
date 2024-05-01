@@ -9,6 +9,7 @@ internal class TileStorage(private val storage: Storage) {
   private val isCurrentVersion = run {
     val version = storage["version"]
     if (version == null || version != currentVersion) {
+      storage.clear()
       storage["version"] = currentVersion
       false
     } else {
