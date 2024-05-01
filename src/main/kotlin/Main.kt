@@ -10,6 +10,7 @@ import org.w3c.dom.Document
 import org.w3c.dom.Element
 import org.w3c.dom.HTMLButtonElement
 import org.w3c.dom.HTMLInputElement
+import org.w3c.dom.get
 
 fun main() {
   val tileStorage = TileStorage(localStorage)
@@ -20,7 +21,6 @@ fun main() {
     tradersAndBuildersTiles.size +
     princessAndDragonTiles.size +
     flyingMachinesTiles.size +
-    messengersTiles.size +
     ferriesTiles.size +
     goldminesTiles.size +
     mageAndWitchTiles.size +
@@ -34,6 +34,79 @@ fun main() {
   val sortUsedCheckbox = document.getElementById("sort-used") as HTMLInputElement
   val resetButton = document.getElementById("reset") as HTMLButtonElement
 
+  val shownTilesCount = ShownTilesCount(0, 0)
+
+  val messengersTilesSize = messengersTiles.size
+  val messengerTileElements = ArrayList<TileElement>(messengersTilesSize)
+  val messengerTileElementPositionsDefault = ArrayList<Int>(messengersTilesSize)
+  for (i in 0 until messengersTilesSize) {
+    messengerTileElementPositionsDefault += i
+  }
+  val messengerTileElementPositions = tileStorage.getMessengerTileOrdinalOrder(
+    messengerTileElementPositionsDefault
+  ).toMutableList()
+  check(messengerTileElementPositions.size == messengersTilesSize)
+  val messengersShownTilesCount = ShownTilesCount(0, 0)
+  val messengerTileElementListener = object : TileElement.Listener {
+    override fun onShowChanged(tileElement: TileElement, show: Boolean) {
+      // Do nothing.
+    }
+
+    override fun onUsedChanged(tileElement: TileElement, used: Boolean) {
+      if (used) {
+        if (messengersShownTilesCount.used == messengersTilesSize - 1) {
+          messengersShownTilesCount.inPile--
+          messengersShownTilesCount.used++
+          for (i in messengersTilesSize - 1 downTo 0) {
+            val messengerTileElement = messengerTileElements[i]
+            messengerTileElement.used = false
+          }
+          return
+        }
+        messengerTileElements.remove(tileElement)
+        messengerTileElements.add(messengersShownTilesCount.used, tileElement)
+        messengersShownTilesCount.inPile--
+        messengersShownTilesCount.used++
+      } else {
+        messengerTileElements.remove(tileElement)
+        messengersShownTilesCount.used--
+        messengerTileElements.add(messengersShownTilesCount.used, tileElement)
+      }
+      val gridChildren = grid.childNodes
+      for (i in messengersTilesSize - 1 downTo 0) {
+        grid.removeChild(gridChildren[i]!!)
+      }
+      val firstChild = grid.firstChild
+      messengerTileElementPositions.clear()
+      for (messengerTileElement in messengerTileElements) {
+        grid.insertBefore(messengerTileElement.element, firstChild)
+        messengerTileElementPositions += messengerTileElement.ordinal
+      }
+      tileStorage.setUsed(tileElement.ordinal, used)
+      tileStorage.setMessengerTileOrdinalOrder(messengerTileElementPositions)
+
+      resetButton.disabled = shownTilesCount.used == 1
+        && messengersShownTilesCount.used == 0
+        && messengerTileElementPositions == messengerTileElementPositionsDefault
+    }
+  }
+  val messengerTileElementsDefault = ArrayList<TileElement>(messengersTilesSize)
+  var ordinal = document.createTiles(
+    messengersTiles,
+    "messengers",
+    grid,
+    messengerTileElementsDefault,
+    ordinalStart = 0,
+    messengersShownTilesCount,
+    messengerTileElementListener,
+    tileStorage
+  )
+  for (position in messengerTileElementPositions) {
+    val messengerTileElement = messengerTileElementsDefault[position]
+    messengerTileElements += messengerTileElement
+    grid.appendChild(messengerTileElement.element)
+  }
+
   resetButton.addEventListener("click", {
     if (window.confirm("Reset all tiles?")) {
       for (tileElement in allTileElements) {
@@ -43,10 +116,24 @@ fun main() {
           }
         }
       }
+      for (i in messengerTileElements.size - 1 downTo 0) {
+        val messengerTileElement = messengerTileElements[i]
+        if (messengerTileElement.used) {
+          messengerTileElement.used = false
+        }
+      }
+
+      // Reset messenger tiles and original ordering.
+      val firstChild = grid.childNodes[messengersTilesSize]
+      messengerTileElements.sortBy {
+        it.ordinal
+      }
+      for (i in 0 until messengersTilesSize) {
+        grid.insertBefore(messengerTileElements[i].element, firstChild)
+      }
+      tileStorage.setMessengerTileOrdinalOrder(messengerTileElementPositionsDefault)
     }
   })
-
-  val shownTilesCount = ShownTilesCount(0, 0)
 
   val defaultComparator = Comparator<TileElement> { a, b ->
     a.ordinal - b.ordinal
@@ -65,7 +152,10 @@ fun main() {
   sortUsedCheckbox.addEventListener("change", {
     sortUsed = (it.target as HTMLInputElement).checked
     allTileElements.sortWith(if (sortUsed) sortUsedComparator else defaultComparator)
-    grid.innerHTML = ""
+    val gridChildren = grid.childNodes
+    for (i in gridChildren.length - 1 downTo messengersTilesSize) {
+      grid.removeChild(gridChildren[i]!!)
+    }
     for (tileElement in allTileElements) {
       grid.appendChild(tileElement.element)
     }
@@ -95,7 +185,10 @@ fun main() {
     override fun onUsedChanged(tileElement: TileElement, used: Boolean) {
       if (sortUsed) {
         allTileElements.sortWith(sortUsedComparator)
-        grid.innerHTML = ""
+        val gridChildren = grid.childNodes
+        for (i in gridChildren.length - 1 downTo messengersTilesSize) {
+          grid.removeChild(gridChildren[i]!!)
+        }
         for (tileElementToAppend in allTileElements) {
           grid.appendChild(tileElementToAppend.element)
         }
@@ -113,6 +206,8 @@ fun main() {
       }
 
       resetButton.disabled = shownTilesCount.used == 1
+        && messengersShownTilesCount.used == 0
+        && messengerTileElementPositions == messengerTileElementPositionsDefault
 
       tileStorage.setUsed(tileElement.ordinal, used)
     }
@@ -123,7 +218,6 @@ fun main() {
 
   var baseSourceTileElement: TileElement? = null
   for (tile in baseTiles) {
-    val ordinal = allTileElements.size
     val isSource = tile.extra === Tile.Extra.Source
     val show = !isSource || !showRiver
     val used = isSource || tileStorage.getUsedStart(ordinal)
@@ -140,12 +234,12 @@ fun main() {
       baseSourceTileElement = baseTileElement
     }
     allTileElements += baseTileElement
+    ordinal++
   }
   checkNotNull(baseSourceTileElement)
 
   val riverTileElements = ArrayList<TileElement>(riverTiles.size)
   for (tile in riverTiles) {
-    val ordinal = allTileElements.size
     val isSource = tile.extra === Tile.Extra.Source
     val used = isSource || tileStorage.getUsedStart(ordinal)
     val riverTileElement = grid.createTile(
@@ -165,108 +259,107 @@ fun main() {
   riverCheckbox.addEventListener("change", {
     val checked = (it.target as HTMLInputElement).checked
     baseSourceTileElement.show = !checked
-    for (tileElement in riverTileElements) {
-      tileElement.show = checked
+    for (riverTileElement in riverTileElements) {
+      riverTileElement.show = checked
     }
 
     tileStorage.setShown(riverCheckboxElementId, checked)
   })
 
-  document.createTiles(
+  ordinal = document.createTiles(
     innsAndCathedralsTiles,
     "inns-and-cathedrals",
     grid,
     allTileElements,
+    ordinal,
     shownTilesCount,
     tileElementListener,
     tileStorage
   )
 
-  document.createTiles(
+  ordinal = document.createTiles(
     tradersAndBuildersTiles,
     "traders-and-builders",
     grid,
     allTileElements,
+    ordinal,
     shownTilesCount,
     tileElementListener,
     tileStorage
   )
 
-  document.createTiles(
+  ordinal = document.createTiles(
     princessAndDragonTiles,
     "princess-and-dragon",
     grid,
     allTileElements,
+    ordinal,
     shownTilesCount,
     tileElementListener,
     tileStorage
   )
 
-  document.createTiles(
+  ordinal = document.createTiles(
     flyingMachinesTiles,
     "flying-machines",
     grid,
     allTileElements,
+    ordinal,
     shownTilesCount,
     tileElementListener,
     tileStorage
   )
 
-  document.createTiles(
-    messengersTiles,
-    "messengers",
-    grid,
-    allTileElements,
-    shownTilesCount,
-    tileElementListener,
-    tileStorage
-  )
-
-  document.createTiles(
+  ordinal = document.createTiles(
     ferriesTiles,
     "ferries",
     grid,
     allTileElements,
+    ordinal,
     shownTilesCount,
     tileElementListener,
     tileStorage
   )
 
-  document.createTiles(
+  ordinal = document.createTiles(
     goldminesTiles,
     "goldmines",
     grid,
     allTileElements,
+    ordinal,
     shownTilesCount,
     tileElementListener,
     tileStorage
   )
 
-  document.createTiles(
+  ordinal = document.createTiles(
     mageAndWitchTiles,
     "mage-and-witch",
     grid,
     allTileElements,
+    ordinal,
     shownTilesCount,
     tileElementListener,
     tileStorage
   )
 
-  document.createTiles(
+  ordinal = document.createTiles(
     robbersTiles,
     "robbers",
     grid,
     allTileElements,
+    ordinal,
     shownTilesCount,
     tileElementListener,
     tileStorage
   )
 
-  document.createTiles(
+  ordinal = document.createTiles(
     cropCircles,
     "crop-circles",
     grid,
     allTileElements,
+    ordinal,
     shownTilesCount,
     tileElementListener,
     tileStorage
@@ -276,11 +369,16 @@ fun main() {
   usedCountDisplay.textContent = shownTilesCount.used.toString()
 
   resetButton.disabled = shownTilesCount.used == 1
+    && messengersShownTilesCount.used == 0
+    && messengerTileElementPositions == messengerTileElementPositionsDefault
 
   // This does not call sortUsedCheckbox's change event listener, so we have to do an initial sort.
   sortUsedCheckbox.checked = sortUsed
   allTileElements.sortWith(if (sortUsed) sortUsedComparator else defaultComparator)
-  grid.innerHTML = ""
+  val gridChildren = grid.childNodes
+  for (i in gridChildren.length - 1 downTo messengersTilesSize) {
+    grid.removeChild(gridChildren[i]!!)
+  }
   for (tileElement in allTileElements) {
     grid.appendChild(tileElement.element)
   }
@@ -293,14 +391,15 @@ private fun Document.createTiles(
   checkboxElementId: String,
   grid: Element,
   allTileElements: MutableList<TileElement>,
+  ordinalStart: Int,
   shownTilesCount: ShownTilesCount,
   tileElementListener: TileElement.Listener,
   tileStorage: TileStorage
-) {
+): Int {
   val show = tileStorage.getShownStart(checkboxElementId)
   val tileElements = ArrayList<TileElement>(tiles.size)
+  var ordinal = ordinalStart
   for (tile in tiles) {
-    val ordinal = allTileElements.size
     val used = tileStorage.getUsedStart(ordinal)
     val tileElement = grid.createTile(
       tile,
@@ -312,6 +411,7 @@ private fun Document.createTiles(
     )
     tileElements += tileElement
     allTileElements += tileElement
+    ordinal++
   }
   val checkboxElement = getElementById(checkboxElementId) as HTMLInputElement
   checkboxElement.checked = show
@@ -323,6 +423,7 @@ private fun Document.createTiles(
 
     tileStorage.setShown(checkboxElementId, checked)
   })
+  return ordinal
 }
 
 private fun Element.createTile(
