@@ -10,9 +10,10 @@
       color-scheme: light only;
     }
 
+    /* (632 - 28 - 28) / 4 */
     #grid-container {
       display: grid;
-      grid-template-columns: repeat(auto-fill, 140px);
+      grid-template-columns: repeat(auto-fill, 144px);
       color: #000000;
       padding-top: 20px;
       padding-right: 28px;
@@ -29,11 +30,13 @@
     body {
       margin: 0;
       background-color: #38AFCD;
+      container-type: inline-size;
     }
 
     #header {
       position: sticky;
-      top: 0; z-index: 1000;
+      top: 0;
+      z-index: 1000;
       padding-top: 20px;
       padding-right: 28px;
       padding-bottom: 20px;
@@ -57,7 +60,7 @@
       }
     }
 
-    @media screen and (max-width: 632px) {
+    @container (max-width: 632px) {
       #grid-container {
         grid-template-columns: repeat(4, 1fr);
       }
@@ -67,7 +70,7 @@
       }
 
       #grid-container > figure > img {
-        width: calc(110 / 142 * 100%);
+        width: calc(110 / 144 * 100%);
       }
     }
   </style>
