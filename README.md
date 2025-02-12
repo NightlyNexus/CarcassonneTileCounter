@@ -1,11 +1,11 @@
 https://nightlynexus.github.io/CarcassonneTileCounter/
 
-Mark Carcassonne tiles as used as you play, so you know what's still in the deck.
+Mark Carcassonne tiles as used as you play, so you know what is still in the deck.
 
 The tiles try to follow the 3rd Edition of Carcassonne.<br/>
 The tile scans are from https://wikicarpedia.com/
 
-![webpage example](webpage-example.jpg)
+![webpage example](webpage_example.png)
 
 License
 --------
