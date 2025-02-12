@@ -73,14 +73,4 @@ internal class TileStorage(private val storage: Storage) {
   private fun String.decodeIntList(): List<Int> {
     return split(',').map { it.toInt() }
   }
-
-  private fun <T> sortByPositions(list: MutableList<T>, positions: List<Int>) {
-    require(list.size == positions.size)
-    val result = ArrayList<T>(list.size)
-    for (position in positions) {
-      result += list[position]
-    }
-    list.clear()
-    list += result
-  }
 }
