@@ -230,7 +230,7 @@ fun main() {
       shownTilesCount,
       tileElementListener
     )
-    if (tile.extra === Tile.Extra.Source) {
+    if (isSource) {
       check(baseSourceTileElement == null)
       baseSourceTileElement = baseTileElement
     }
