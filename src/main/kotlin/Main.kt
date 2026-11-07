@@ -253,6 +253,7 @@ fun main() {
     )
     riverTileElements += riverTileElement
     allTileElements += riverTileElement
+    ordinal++
   }
 
   val riverCheckbox = document.getElementById(riverCheckboxElementId) as HTMLInputElement
