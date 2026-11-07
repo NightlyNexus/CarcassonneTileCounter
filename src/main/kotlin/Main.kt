@@ -20,6 +20,7 @@ fun main() {
     innsAndCathedralsTiles.size +
     tradersAndBuildersTiles.size +
     princessAndDragonTiles.size +
+    dragonAndFairyTiles.size +
     flyingMachinesTiles.size +
     ferriesTiles.size +
     goldminesTiles.size +
@@ -215,7 +216,10 @@ fun main() {
   }
 
   val riverCheckboxElementId = "river"
-  val showRiver = tileStorage.getShownStart(riverCheckboxElementId)
+  var showRiver = tileStorage.getShownStart(riverCheckboxElementId)
+  val dragonAndFairyCheckboxElementId = "dragon-and-fairy"
+  var showDragonAndFairy = tileStorage.getShownStart(dragonAndFairyCheckboxElementId)
+  val dragonAndFairyRiverTileElements = ArrayList<TileElement>(2)
 
   var baseSourceTileElement: TileElement? = null
   for (tile in baseTiles) {
@@ -239,30 +243,50 @@ fun main() {
   }
   checkNotNull(baseSourceTileElement)
 
+  var riverSourceTileElement: TileElement? = null
   val riverTileElements = ArrayList<TileElement>(riverTiles.size)
   for (tile in riverTiles) {
     val isSource = tile.extra === Tile.Extra.Source
+    // Dragon & Fairy has a replacement river source tile.
+    val show = showRiver && (!isSource || !showDragonAndFairy)
     val used = isSource || tileStorage.getUsedStart(ordinal)
     val riverTileElement = grid.createTile(
       tile,
       ordinal,
-      showRiver,
+      show,
       used,
       shownTilesCount,
       tileElementListener
     )
+    if (isSource) {
+      check(riverSourceTileElement == null)
+      riverSourceTileElement = riverTileElement
+    }
     riverTileElements += riverTileElement
     allTileElements += riverTileElement
     ordinal++
   }
-
-  val riverCheckbox = document.getElementById(riverCheckboxElementId) as HTMLInputElement
-  riverCheckbox.checked = showRiver
-  riverCheckbox.addEventListener("change", {
+  checkNotNull(riverSourceTileElement)
+  val riverCheckboxElement = document.getElementById(
+    riverCheckboxElementId
+  ) as HTMLInputElement
+  riverCheckboxElement.checked = showRiver
+  riverCheckboxElement.addEventListener("change", {
     val checked = (it.target as HTMLInputElement).checked
+    showRiver = checked
     baseSourceTileElement.show = !checked
+    // Show or hide the river tiles in Dragon & Fairy.
+    if (showDragonAndFairy) {
+      for (dragonAndFairyRiverTileElement in dragonAndFairyRiverTileElements) {
+        dragonAndFairyRiverTileElement.show = checked
+      }
+    }
     for (riverTileElement in riverTileElements) {
-      riverTileElement.show = checked
+      val isSource = riverTileElement.tile.extra === Tile.Extra.Source
+      // The source river tile has no change (still not shown) when we are showing Dragon & Fairy.
+      if (!isSource || !showDragonAndFairy) {
+        riverTileElement.show = checked
+      }
     }
 
     tileStorage.setShown(riverCheckboxElementId, checked)
@@ -300,6 +324,50 @@ fun main() {
     tileElementListener,
     tileStorage
   )
+
+  val dragonAndFairyTileElements = ArrayList<TileElement>(dragonAndFairyTiles.size)
+  for (tile in dragonAndFairyTiles) {
+    val isSource = tile.extra === Tile.Extra.Source
+    val show = showDragonAndFairy && (showRiver || !tile.hasRiver)
+    val used = isSource || tileStorage.getUsedStart(ordinal)
+    val tileElement = grid.createTile(
+      tile,
+      ordinal,
+      show,
+      used,
+      shownTilesCount,
+      tileElementListener
+    )
+    if (tile.hasRiver) {
+      dragonAndFairyRiverTileElements += tileElement
+    }
+    dragonAndFairyTileElements += tileElement
+    allTileElements += tileElement
+    ordinal++
+  }
+  val dragonAndFairyCheckboxElement = document.getElementById(
+    dragonAndFairyCheckboxElementId
+  ) as HTMLInputElement
+  dragonAndFairyCheckboxElement.checked = showDragonAndFairy
+  dragonAndFairyCheckboxElement.addEventListener("change", {
+    val checked = (it.target as HTMLInputElement).checked
+    showDragonAndFairy = checked
+    // If we show the river, show the river's source tile element if and only if we do not show
+    // Dragon & Fairy.
+    if (showRiver) {
+      riverSourceTileElement.show = !checked
+    }
+    for (dragonAndFairyTileElement in dragonAndFairyTileElements) {
+      val isRiver = dragonAndFairyTileElement.tile.hasRiver
+      // The Dragon & Fairy river tiles, including the Dragon & Fairy river source tile, have no
+      // change (still not shown) when we are not showing the river.
+      if (!isRiver || showRiver) {
+        dragonAndFairyTileElement.show = checked
+      }
+    }
+
+    tileStorage.setShown(dragonAndFairyCheckboxElementId, checked)
+  })
 
   ordinal = document.createTiles(
     flyingMachinesTiles,
@@ -415,7 +483,9 @@ private fun Document.createTiles(
     allTileElements += tileElement
     ordinal++
   }
-  val checkboxElement = getElementById(checkboxElementId) as HTMLInputElement
+  val checkboxElement = getElementById(
+    checkboxElementId
+  ) as HTMLInputElement
   checkboxElement.checked = show
   checkboxElement.addEventListener("change", {
     val checked = (it.target as HTMLInputElement).checked
@@ -547,6 +617,7 @@ private val baseTiles = listOf(
   ),
   Tile(
     "base/Base_Game_C3_Tile_C.png",
+    hasCastle = true,
     hasShieldCastle = true,
     extra = Tile.Extra.WaterTower
   ),
@@ -598,10 +669,12 @@ private val baseTiles = listOf(
   ),
   Tile(
     "base/Base_Game_C3_Tile_F.png",
+    hasCastle = true,
     hasShieldCastle = true
   ),
   Tile(
     "base/Base_Game_C3_Tile_F.png",
+    hasCastle = true,
     hasShieldCastle = true,
     extra = Tile.Extra.WaterTower
   ),
@@ -685,10 +758,12 @@ private val baseTiles = listOf(
   ),
   Tile(
     "base/Base_Game_C3_Tile_M.png",
+    hasCastle = true,
     hasShieldCastle = true
   ),
   Tile(
     "base/Abbot-Base_Game_C2_Tile_M_Garden.jpg",
+    hasCastle = true,
     hasShieldCastle = true,
     extra = Tile.Extra.Garden
   ),
@@ -709,12 +784,14 @@ private val baseTiles = listOf(
   Tile(
     "base/Base_Game_C3_Tile_O.png",
     hasRoad = true,
+    hasCastle = true,
     hasShieldCastle = true,
     extra = Tile.Extra.Farmhouse
   ),
   Tile(
     "base/Base_Game_C3_Tile_O.png",
     hasRoad = true,
+    hasCastle = true,
     hasShieldCastle = true,
     extra = Tile.Extra.Cowshed
   ),
@@ -737,6 +814,7 @@ private val baseTiles = listOf(
   ),
   Tile(
     "base/Base_Game_C3_Tile_Q.png",
+    hasCastle = true,
     hasShieldCastle = true
   ),
   Tile(
@@ -756,11 +834,13 @@ private val baseTiles = listOf(
   Tile(
     "base/Base_Game_C3_Tile_S.png",
     hasRoad = true,
+    hasCastle = true,
     hasShieldCastle = true
   ),
   Tile(
     "base/Base_Game_C3_Tile_S.png",
     hasRoad = true,
+    hasCastle = true,
     hasShieldCastle = true,
     extra = Tile.Extra.WaterTower
   ),
@@ -873,54 +953,66 @@ private val baseTiles = listOf(
 private val riverTiles = listOf(
   Tile(
     "river/River_I_C3_Tile_A.png",
+    hasRiver = true,
     hasRoad = true,
     extra = Tile.Extra.Source
   ),
   Tile(
     "river/River_I_C3_Tile_B.png",
+    hasRiver = true,
     hasRoad = true,
     hasCastle = true
   ),
   Tile(
     "river/River_I_C3_Tile_C.png",
+    hasRiver = true,
     hasCastle = true
   ),
   Tile(
     "river/River_I_C3_Tile_D.png",
+    hasRiver = true,
     extra = Tile.Extra.DonkeyStable
   ),
   Tile(
     "river/River_I_C3_Tile_E.png",
+    hasRiver = true,
     hasCastle = true,
     extra = Tile.Extra.WaterTower
   ),
   Tile(
-    "river/River_I_C3_Tile_F.png"
+    "river/River_I_C3_Tile_F.png",
+    hasRiver = true
   ),
   Tile(
     "river/River_I_C3_Tile_G.png",
+    hasRiver = true,
     extra = Tile.Extra.Farmhouse
   ),
   Tile(
     "river/River_I_C3_Tile_H.png",
+    hasRiver = true,
     hasRoad = true,
     hasMonastery = true
   ),
   Tile(
     "river/River_I_C3_Tile_I.png",
+    hasRiver = true,
     hasRoad = true,
     extra = Tile.Extra.Highwaymen
   ),
   Tile(
     "river/River_I_C3_Tile_J.png",
+    hasRiver = true,
     extra = Tile.Extra.Garden
   ),
   Tile(
     "river/River_I_C3_Tile_K.png",
+    hasRiver = true,
     hasRoad = true
   ),
   Tile(
     "river/River_I_C3_Tile_L.png",
+    hasRiver = true,
     hasMonastery = true
   )
 )
@@ -991,6 +1083,7 @@ private val innsAndCathedralsTiles = listOf(
   Tile(
     "innsandcathedrals/Inns_And_Cathedrals_C3_Tile_L.png",
     hasInnRoad = true,
+    hasCastle = true,
     hasShieldCastle = true
   ),
   Tile(
@@ -1017,6 +1110,7 @@ private val innsAndCathedralsTiles = listOf(
   Tile(
     "innsandcathedrals/Inns_And_Cathedrals_C3_Tile_Q.png",
     hasRoad = true,
+    hasCastle = true,
     hasShieldCastle = true
   )
 )
@@ -1234,6 +1328,7 @@ private val princessAndDragonTiles = listOf(
   ),
   Tile(
     "princessanddragon/Princess_And_Dragon_C2_Tile_N.jpg",
+    hasCastle = true,
     hasShieldCastle = true,
     hasDragon = true
   ),
@@ -1320,7 +1415,169 @@ private val princessAndDragonTiles = listOf(
     "princessanddragon/Princess_And_Dragon_C2_Tile_3.jpg",
     hasRoad = true,
     hasVolcano = true
+  )
+)
+
+private val dragonAndFairyTiles = listOf(
+  Tile(
+    "dragonandfairy/Dragon_And_Fairy_C31_Tile_A.jpg",
+    hasRiver = true,
+    hasCastle = true,
+    hasMonastery = true,
+    extra = Tile.Extra.Source
   ),
+  Tile(
+    "dragonandfairy/Dragon_And_Fairy_C31_Tile_B_Front.jpg",
+    hasRiver = true,
+    extra = Tile.Extra.Garden
+  ),
+  // We are not going to use the dragonandfairy/Dragon_And_Fairy_C31_Tile_B_Back.jpg tile for now.
+  Tile(
+    "dragonandfairy/Dragon_And_Fairy_C31_Tile_C.jpg",
+    hasRoad = true,
+    hasCastle = true,
+    hasDragon = true
+  ),
+  Tile(
+    "dragonandfairy/Dragon_And_Fairy_C31_Tile_D.jpg",
+    hasCastle = true,
+    hasDragon = true,
+    extra = Tile.Extra.WaterTower
+  ),
+  Tile(
+    "dragonandfairy/Dragon_And_Fairy_C31_Tile_E.jpg",
+    hasCastle = true,
+    extra = Tile.Extra.WaterTower
+  ),
+  Tile(
+    "dragonandfairy/Dragon_And_Fairy_C31_Tile_F.jpg",
+    hasCastle = true,
+    hasShieldCastle = true
+  ),
+  Tile(
+    "dragonandfairy/Dragon_And_Fairy_C31_Tile_G.jpg",
+    hasRoad = true,
+    hasDragon = true,
+    extra = Tile.Extra.Highwaymen
+  ),
+  Tile(
+    "dragonandfairy/Dragon_And_Fairy_C31_Tile_H.jpg",
+    hasRoad = true,
+    hasDragon = true
+  ),
+  Tile(
+    "dragonandfairy/Dragon_And_Fairy_C31_Tile_I.jpg",
+    hasCastle = true,
+    hasDragon = true,
+    extra = Tile.Extra.Garden
+  ),
+  Tile(
+    "dragonandfairy/Dragon_And_Fairy_C31_Tile_J.jpg",
+    hasCastle = true,
+    hasDragon = true,
+    extra = Tile.Extra.DonkeyStable
+  ),
+  Tile(
+    "dragonandfairy/Dragon_And_Fairy_C31_Tile_K.jpg",
+    hasRoad = true,
+    hasCastle = true,
+    hasDragon = true
+  ),
+  Tile(
+    "dragonandfairy/Dragon_And_Fairy_C31_Tile_L.jpg",
+    hasRoad = true,
+    hasCastle = true,
+    hasDragon = true
+  ),
+  Tile(
+    "dragonandfairy/Dragon_And_Fairy_C31_Tile_M.jpg",
+    hasCastle = true,
+    hasShieldCastle = true,
+    hasDragon = true
+  ),
+  Tile(
+    "dragonandfairy/Dragon_And_Fairy_C31_Tile_N.jpg",
+    hasCastle = true,
+    hasMonastery = true
+  ),
+  Tile(
+    "dragonandfairy/Dragon_And_Fairy_C31_Tile_O.jpg",
+    hasRoad = true,
+    hasCastle = true,
+    hasDragon = true
+  ),
+  Tile(
+    "dragonandfairy/Dragon_And_Fairy_C31_Tile_P.jpg",
+    hasRoad = true,
+    hasTunnelRoad = true,
+    hasCastle = true,
+  ),
+  Tile(
+    "dragonandfairy/Dragon_And_Fairy_C31_Tile_Q.jpg",
+    hasRoad = true,
+    hasMagicPortal = true,
+    extra = Tile.Extra.Farmhouse
+  ),
+  Tile(
+    "dragonandfairy/Dragon_And_Fairy_C31_Tile_R.jpg",
+    hasCastle = true,
+    hasMagicPortal = true
+  ),
+  Tile(
+    "dragonandfairy/Dragon_And_Fairy_C31_Tile_S.jpg",
+    hasRoad = true,
+    hasCastle = true,
+    hasMagicPortal = true
+  ),
+  Tile(
+    "dragonandfairy/Dragon_And_Fairy_C31_Tile_T.jpg",
+    hasRoad = true,
+    hasCastle = true,
+    hasMagicPortal = true
+  ),
+  Tile(
+    "dragonandfairy/Dragon_And_Fairy_C31_Tile_U.jpg",
+    hasRoad = true,
+    hasCastle = true,
+    hasMagicPortal = true
+  ),
+  Tile(
+    "dragonandfairy/Dragon_And_Fairy_C31_Tile_V.jpg",
+    hasRoad = true,
+    hasMagicPortal = true,
+    extra = Tile.Extra.Highwaymen
+  ),
+  Tile(
+    "dragonandfairy/Dragon_And_Fairy_C31_Tile_W.jpg",
+    hasRoad = true,
+    hasDragonHoard = true
+  ),
+  Tile(
+    "dragonandfairy/Dragon_And_Fairy_C31_Tile_X.jpg",
+    hasCastle = true,
+    hasDragonHoard = true
+  ),
+  Tile(
+    "dragonandfairy/Dragon_And_Fairy_C31_Tile_Y.jpg",
+    hasCastle = true,
+    hasDragonHoard = true
+  ),
+  Tile(
+    "dragonandfairy/Dragon_And_Fairy_C31_Tile_Z.jpg",
+    hasRoad = true,
+    hasDragonHoard = true,
+    extra = Tile.Extra.Farmhouse
+  ),
+  Tile(
+    "dragonandfairy/Dragon_And_Fairy_C31_Tile_1.jpg",
+    hasDragonHoard = true,
+    extra = Tile.Extra.Pigsty
+  ),
+  Tile(
+    "dragonandfairy/Dragon_And_Fairy_C31_Tile_2.jpg",
+    hasRoad = true,
+    hasDragonHoard = true
+  )
 )
 
 private val flyingMachinesTiles = listOf(
