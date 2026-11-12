@@ -683,69 +683,69 @@ private class TileElement(
 
 private val baseTiles = listOf(
   Tile(
-    "base/Base_Game_C3_Tile_A.png",
+    "base/Base_Game_C3_Tile_A.webp",
     hasRoad = true,
     hasMonastery = true
   ),
   Tile(
-    "base/Base_Game_C3_Tile_A.png",
+    "base/Base_Game_C3_Tile_A.webp",
     hasRoad = true,
     hasMonastery = true,
     extra = Tile.Extra.Highwaymen
   ),
   Tile(
-    "base/Base_Game_C3_Tile_B.png",
+    "base/Base_Game_C3_Tile_B.webp",
     hasMonastery = true
   ),
   Tile(
-    "base/Base_Game_C3_Tile_B.png",
+    "base/Base_Game_C3_Tile_B.webp",
     hasMonastery = true
   ),
   Tile(
-    "base/Base_Game_C3_Tile_B.png",
+    "base/Base_Game_C3_Tile_B.webp",
     hasMonastery = true,
     extra = Tile.Extra.Farmhouse
   ),
   Tile(
-    "base/Base_Game_C3_Tile_B.png",
+    "base/Base_Game_C3_Tile_B.webp",
     hasMonastery = true,
     extra = Tile.Extra.DonkeyStable
   ),
   Tile(
-    "base/Base_Game_C3_Tile_C.png",
+    "base/Base_Game_C3_Tile_C.webp",
     hasCastle = true,
     hasShieldCastle = true,
     extra = Tile.Extra.WaterTower
   ),
   Tile(
-    "base/Base_Game_C3_Tile_D.png",
+    "base/Base_Game_C3_Tile_D.webp",
     hasRoad = true,
     hasCastle = true,
     extra = Tile.Extra.Source
   ),
   Tile(
-    "base/Base_Game_C3_Tile_D.png",
+    "base/Base_Game_C3_Tile_D.webp",
     hasRoad = true,
     hasCastle = true
   ),
   Tile(
-    "base/Base_Game_C3_Tile_D.png",
+    "base/Base_Game_C3_Tile_D.webp",
     hasRoad = true,
     hasCastle = true,
     extra = Tile.Extra.Farmhouse
   ),
   Tile(
-    "base/Base_Game_C3_Tile_D.png",
+    "base/Base_Game_C3_Tile_D.webp",
     hasRoad = true,
     hasCastle = true,
     extra = Tile.Extra.Pigsty
   ),
   Tile(
-    "base/Base_Game_C3_Tile_E.png",
+    "base/Base_Game_C3_Tile_E.webp",
     hasCastle = true
   ),
   Tile(
-    "base/Base_Game_C3_Tile_E.png",
+    "base/Base_Game_C3_Tile_E.webp",
     hasCastle = true
   ),
   Tile(
@@ -754,32 +754,32 @@ private val baseTiles = listOf(
     extra = Tile.Extra.Garden
   ),
   Tile(
-    "base/Base_Game_C3_Tile_E.png",
+    "base/Base_Game_C3_Tile_E.webp",
     hasCastle = true,
     extra = Tile.Extra.Farmhouse
   ),
   Tile(
-    "base/Base_Game_C3_Tile_E.png",
+    "base/Base_Game_C3_Tile_E.webp",
     hasCastle = true,
     extra = Tile.Extra.WaterTower
   ),
   Tile(
-    "base/Base_Game_C3_Tile_F.png",
+    "base/Base_Game_C3_Tile_F.webp",
     hasCastle = true,
     hasShieldCastle = true
   ),
   Tile(
-    "base/Base_Game_C3_Tile_F.png",
+    "base/Base_Game_C3_Tile_F.webp",
     hasCastle = true,
     hasShieldCastle = true,
     extra = Tile.Extra.WaterTower
   ),
   Tile(
-    "base/Base_Game_C3_Tile_G.png",
+    "base/Base_Game_C3_Tile_G.webp",
     hasCastle = true
   ),
   Tile(
-    "base/Base_Game_C3_Tile_H.png",
+    "base/Base_Game_C3_Tile_H.webp",
     hasCastle = true
   ),
   Tile(
@@ -788,12 +788,12 @@ private val baseTiles = listOf(
     extra = Tile.Extra.Garden
   ),
   Tile(
-    "base/Base_Game_C3_Tile_H.png",
+    "base/Base_Game_C3_Tile_H.webp",
     hasCastle = true,
     extra = Tile.Extra.WaterTower
   ),
   Tile(
-    "base/Base_Game_C3_Tile_I.png",
+    "base/Base_Game_C3_Tile_I.webp",
     hasCastle = true
   ),
   Tile(
@@ -802,58 +802,58 @@ private val baseTiles = listOf(
     extra = Tile.Extra.Garden
   ),
   Tile(
-    "base/Base_Game_C3_Tile_J.png",
+    "base/Base_Game_C3_Tile_J.webp",
     hasRoad = true,
     hasCastle = true,
     extra = Tile.Extra.Highwaymen
   ),
   Tile(
-    "base/Base_Game_C3_Tile_J.png",
+    "base/Base_Game_C3_Tile_J.webp",
     hasRoad = true,
     hasCastle = true,
     extra = Tile.Extra.Farmhouse
   ),
   Tile(
-    "base/Base_Game_C3_Tile_J.png",
+    "base/Base_Game_C3_Tile_J.webp",
     hasRoad = true,
     hasCastle = true,
     extra = Tile.Extra.Cowshed
   ),
   Tile(
-    "base/Base_Game_C3_Tile_K.png",
+    "base/Base_Game_C3_Tile_K.webp",
     hasRoad = true,
     hasCastle = true,
     extra = Tile.Extra.Highwaymen
   ),
   Tile(
-    "base/Base_Game_C3_Tile_K.png",
+    "base/Base_Game_C3_Tile_K.webp",
     hasRoad = true,
     hasCastle = true,
     extra = Tile.Extra.Farmhouse
   ),
   Tile(
-    "base/Base_Game_C3_Tile_K.png",
+    "base/Base_Game_C3_Tile_K.webp",
     hasRoad = true,
     hasCastle = true,
     extra = Tile.Extra.DonkeyStable
   ),
   Tile(
-    "base/Base_Game_C3_Tile_L.png",
+    "base/Base_Game_C3_Tile_L.webp",
     hasRoad = true,
     hasCastle = true
   ),
   Tile(
-    "base/Base_Game_C3_Tile_L.png",
+    "base/Base_Game_C3_Tile_L.webp",
     hasRoad = true,
     hasCastle = true
   ),
   Tile(
-    "base/Base_Game_C3_Tile_L.png",
+    "base/Base_Game_C3_Tile_L.webp",
     hasRoad = true,
     hasCastle = true
   ),
   Tile(
-    "base/Base_Game_C3_Tile_M.png",
+    "base/Base_Game_C3_Tile_M.webp",
     hasCastle = true,
     hasShieldCastle = true
   ),
@@ -864,7 +864,7 @@ private val baseTiles = listOf(
     extra = Tile.Extra.Garden
   ),
   Tile(
-    "base/Base_Game_C3_Tile_N.png",
+    "base/Base_Game_C3_Tile_N.webp",
     hasCastle = true
   ),
   Tile(
@@ -873,48 +873,48 @@ private val baseTiles = listOf(
     extra = Tile.Extra.Garden
   ),
   Tile(
-    "base/Base_Game_C3_Tile_N.png",
+    "base/Base_Game_C3_Tile_N.webp",
     hasCastle = true,
     extra = Tile.Extra.WaterTower
   ),
   Tile(
-    "base/Base_Game_C3_Tile_O.png",
+    "base/Base_Game_C3_Tile_O.webp",
     hasRoad = true,
     hasCastle = true,
     hasShieldCastle = true,
     extra = Tile.Extra.Farmhouse
   ),
   Tile(
-    "base/Base_Game_C3_Tile_O.png",
+    "base/Base_Game_C3_Tile_O.webp",
     hasRoad = true,
     hasCastle = true,
     hasShieldCastle = true,
     extra = Tile.Extra.Cowshed
   ),
   Tile(
-    "base/Base_Game_C3_Tile_P.png",
+    "base/Base_Game_C3_Tile_P.webp",
     hasRoad = true,
     hasCastle = true
   ),
   Tile(
-    "base/Base_Game_C3_Tile_P.png",
+    "base/Base_Game_C3_Tile_P.webp",
     hasRoad = true,
     hasCastle = true,
     extra = Tile.Extra.Highwaymen
   ),
   Tile(
-    "base/Base_Game_C3_Tile_P.png",
+    "base/Base_Game_C3_Tile_P.webp",
     hasRoad = true,
     hasCastle = true,
     extra = Tile.Extra.WaterTower
   ),
   Tile(
-    "base/Base_Game_C3_Tile_Q.png",
+    "base/Base_Game_C3_Tile_Q.webp",
     hasCastle = true,
     hasShieldCastle = true
   ),
   Tile(
-    "base/Base_Game_C3_Tile_R.png",
+    "base/Base_Game_C3_Tile_R.webp",
     hasCastle = true
   ),
   Tile(
@@ -923,38 +923,38 @@ private val baseTiles = listOf(
     extra = Tile.Extra.Garden
   ),
   Tile(
-    "base/Base_Game_C3_Tile_R.png",
+    "base/Base_Game_C3_Tile_R.webp",
     hasCastle = true,
     extra = Tile.Extra.WaterTower
   ),
   Tile(
-    "base/Base_Game_C3_Tile_S.png",
+    "base/Base_Game_C3_Tile_S.webp",
     hasRoad = true,
     hasCastle = true,
     hasShieldCastle = true
   ),
   Tile(
-    "base/Base_Game_C3_Tile_S.png",
+    "base/Base_Game_C3_Tile_S.webp",
     hasRoad = true,
     hasCastle = true,
     hasShieldCastle = true,
     extra = Tile.Extra.WaterTower
   ),
   Tile(
-    "base/Base_Game_C3_Tile_T.png",
+    "base/Base_Game_C3_Tile_T.webp",
     hasRoad = true,
     hasCastle = true
   ),
   Tile(
-    "base/Base_Game_C3_Tile_U.png",
+    "base/Base_Game_C3_Tile_U.webp",
     hasRoad = true
   ),
   Tile(
-    "base/Base_Game_C3_Tile_U.png",
+    "base/Base_Game_C3_Tile_U.webp",
     hasRoad = true
   ),
   Tile(
-    "base/Base_Game_C3_Tile_U.png",
+    "base/Base_Game_C3_Tile_U.webp",
     hasRoad = true
   ),
   Tile(
@@ -963,35 +963,35 @@ private val baseTiles = listOf(
     extra = Tile.Extra.Garden
   ),
   Tile(
-    "base/Base_Game_C3_Tile_U.png",
+    "base/Base_Game_C3_Tile_U.webp",
     hasRoad = true,
     extra = Tile.Extra.Highwaymen
   ),
   Tile(
-    "base/Base_Game_C3_Tile_U.png",
+    "base/Base_Game_C3_Tile_U.webp",
     hasRoad = true,
     extra = Tile.Extra.Highwaymen
   ),
   Tile(
-    "base/Base_Game_C3_Tile_U.png",
+    "base/Base_Game_C3_Tile_U.webp",
     hasRoad = true,
     extra = Tile.Extra.Farmhouse
   ),
   Tile(
-    "base/Base_Game_C3_Tile_U.png",
+    "base/Base_Game_C3_Tile_U.webp",
     hasRoad = true,
     extra = Tile.Extra.Pigsty
   ),
   Tile(
-    "base/Base_Game_C3_Tile_V.png",
+    "base/Base_Game_C3_Tile_V.webp",
     hasRoad = true
   ),
   Tile(
-    "base/Base_Game_C3_Tile_V.png",
+    "base/Base_Game_C3_Tile_V.webp",
     hasRoad = true
   ),
   Tile(
-    "base/Base_Game_C3_Tile_V.png",
+    "base/Base_Game_C3_Tile_V.webp",
     hasRoad = true
   ),
   Tile(
@@ -1000,114 +1000,114 @@ private val baseTiles = listOf(
     extra = Tile.Extra.Garden
   ),
   Tile(
-    "base/Base_Game_C3_Tile_V.png",
+    "base/Base_Game_C3_Tile_V.webp",
     hasRoad = true,
     extra = Tile.Extra.Highwaymen
   ),
   Tile(
-    "base/Base_Game_C3_Tile_V.png",
+    "base/Base_Game_C3_Tile_V.webp",
     hasRoad = true,
     extra = Tile.Extra.Highwaymen
   ),
   Tile(
-    "base/Base_Game_C3_Tile_V.png",
+    "base/Base_Game_C3_Tile_V.webp",
     hasRoad = true,
     extra = Tile.Extra.Farmhouse
   ),
   Tile(
-    "base/Base_Game_C3_Tile_V.png",
+    "base/Base_Game_C3_Tile_V.webp",
     hasRoad = true,
     extra = Tile.Extra.Pigsty
   ),
   Tile(
-    "base/Base_Game_C3_Tile_V.png",
+    "base/Base_Game_C3_Tile_V.webp",
     hasRoad = true,
     extra = Tile.Extra.Cowshed
   ),
   Tile(
-    "base/Base_Game_C3_Tile_W.png",
+    "base/Base_Game_C3_Tile_W.webp",
     hasRoad = true
   ),
   Tile(
-    "base/Base_Game_C3_Tile_W.png",
+    "base/Base_Game_C3_Tile_W.webp",
     hasRoad = true
   ),
   Tile(
-    "base/Base_Game_C3_Tile_W.png",
+    "base/Base_Game_C3_Tile_W.webp",
     hasRoad = true
   ),
   Tile(
-    "base/Base_Game_C3_Tile_W.png",
+    "base/Base_Game_C3_Tile_W.webp",
     hasRoad = true
   ),
   Tile(
-    "base/Base_Game_C3_Tile_X.png",
+    "base/Base_Game_C3_Tile_X.webp",
     hasRoad = true
   )
 )
 
 private val riverTiles = listOf(
   Tile(
-    "river/River_I_C3_Tile_A.png",
+    "river/River_I_C3_Tile_A.webp",
     hasRiver = true,
     hasRoad = true,
     extra = Tile.Extra.Source
   ),
   Tile(
-    "river/River_I_C3_Tile_B.png",
+    "river/River_I_C3_Tile_B.webp",
     hasRiver = true,
     hasRoad = true,
     hasCastle = true
   ),
   Tile(
-    "river/River_I_C3_Tile_C.png",
+    "river/River_I_C3_Tile_C.webp",
     hasRiver = true,
     hasCastle = true
   ),
   Tile(
-    "river/River_I_C3_Tile_D.png",
+    "river/River_I_C3_Tile_D.webp",
     hasRiver = true,
     extra = Tile.Extra.DonkeyStable
   ),
   Tile(
-    "river/River_I_C3_Tile_E.png",
+    "river/River_I_C3_Tile_E.webp",
     hasRiver = true,
     hasCastle = true,
     extra = Tile.Extra.WaterTower
   ),
   Tile(
-    "river/River_I_C3_Tile_F.png",
+    "river/River_I_C3_Tile_F.webp",
     hasRiver = true
   ),
   Tile(
-    "river/River_I_C3_Tile_G.png",
+    "river/River_I_C3_Tile_G.webp",
     hasRiver = true,
     extra = Tile.Extra.Farmhouse
   ),
   Tile(
-    "river/River_I_C3_Tile_H.png",
+    "river/River_I_C3_Tile_H.webp",
     hasRiver = true,
     hasRoad = true,
     hasMonastery = true
   ),
   Tile(
-    "river/River_I_C3_Tile_I.png",
+    "river/River_I_C3_Tile_I.webp",
     hasRiver = true,
     hasRoad = true,
     extra = Tile.Extra.Highwaymen
   ),
   Tile(
-    "river/River_I_C3_Tile_J.png",
+    "river/River_I_C3_Tile_J.webp",
     hasRiver = true,
     extra = Tile.Extra.Garden
   ),
   Tile(
-    "river/River_I_C3_Tile_K.png",
+    "river/River_I_C3_Tile_K.webp",
     hasRiver = true,
     hasRoad = true
   ),
   Tile(
-    "river/River_I_C3_Tile_L.png",
+    "river/River_I_C3_Tile_L.webp",
     hasRiver = true,
     hasMonastery = true
   )
@@ -1115,96 +1115,96 @@ private val riverTiles = listOf(
 
 private val innsAndCathedralsTiles = listOf(
   Tile(
-    "innsandcathedrals/Inns_And_Cathedrals_C3_Tile_A.png",
+    "innsandcathedrals/Inns_And_Cathedrals_C3_Tile_A.webp",
     hasInnRoad = true,
     extra = Tile.Extra.Highwaymen
   ),
   Tile(
-    "innsandcathedrals/Inns_And_Cathedrals_C3_Tile_B.png",
+    "innsandcathedrals/Inns_And_Cathedrals_C3_Tile_B.webp",
     hasInnRoad = true,
     extra = Tile.Extra.Garden
   ),
   Tile(
-    "innsandcathedrals/Inns_And_Cathedrals_C3_Tile_C.png",
+    "innsandcathedrals/Inns_And_Cathedrals_C3_Tile_C.webp",
     hasInnRoad = true,
     extra = Tile.Extra.Pigsty
   ),
   Tile(
-    "innsandcathedrals/Inns_And_Cathedrals_C3_Tile_D.png",
+    "innsandcathedrals/Inns_And_Cathedrals_C3_Tile_D.webp",
     hasRoad = true,
     hasMonastery = true
   ),
   Tile(
-    "innsandcathedrals/Inns_And_Cathedrals_C3_Tile_E.png",
+    "innsandcathedrals/Inns_And_Cathedrals_C3_Tile_E.webp",
     hasRoad = true,
     extra = Tile.Extra.Farmhouse
   ),
   Tile(
-    "innsandcathedrals/Inns_And_Cathedrals_C3_Tile_F.png",
+    "innsandcathedrals/Inns_And_Cathedrals_C3_Tile_F.webp",
     hasRoad = true,
     hasCastle = true,
     extra = Tile.Extra.DonkeyStable
   ),
   Tile(
-    "innsandcathedrals/Inns_And_Cathedrals_C3_Tile_G.png",
+    "innsandcathedrals/Inns_And_Cathedrals_C3_Tile_G.webp",
     hasCastle = true,
     extra = Tile.Extra.WaterTower
   ),
   Tile(
-    "innsandcathedrals/Inns_And_Cathedrals_C3_Tile_H.png",
+    "innsandcathedrals/Inns_And_Cathedrals_C3_Tile_H.webp",
     hasCastle = true,
     extra = Tile.Extra.Garden
   ),
   Tile(
-    "innsandcathedrals/Inns_And_Cathedrals_C3_Tile_I.png",
+    "innsandcathedrals/Inns_And_Cathedrals_C3_Tile_I.webp",
     hasRoad = true,
     hasCastle = true
   ),
   Tile(
-    "innsandcathedrals/Inns_And_Cathedrals_C3_Tile_J.png",
+    "innsandcathedrals/Inns_And_Cathedrals_C3_Tile_J.webp",
     hasRoad = true,
     hasCastle = true,
     extra = Tile.Extra.Highwaymen
   ),
   Tile(
-    "innsandcathedrals/Inns_And_Cathedrals_C3_Tile_Ka.png",
+    "innsandcathedrals/Inns_And_Cathedrals_C3_Tile_Ka.webp",
     hasCastle = true,
     extra = Tile.Extra.Cathedral
   ),
   Tile(
-    "innsandcathedrals/Inns_And_Cathedrals_C3_Tile_Kb.png",
+    "innsandcathedrals/Inns_And_Cathedrals_C3_Tile_Kb.webp",
     hasCastle = true,
     extra = Tile.Extra.Cathedral
   ),
   Tile(
-    "innsandcathedrals/Inns_And_Cathedrals_C3_Tile_L.png",
+    "innsandcathedrals/Inns_And_Cathedrals_C3_Tile_L.webp",
     hasInnRoad = true,
     hasCastle = true,
     hasShieldCastle = true
   ),
   Tile(
-    "innsandcathedrals/Inns_And_Cathedrals_C3_Tile_M.png",
+    "innsandcathedrals/Inns_And_Cathedrals_C3_Tile_M.webp",
     hasInnRoad = true,
     hasCastle = true
   ),
   Tile(
-    "innsandcathedrals/Inns_And_Cathedrals_C3_Tile_N.png",
+    "innsandcathedrals/Inns_And_Cathedrals_C3_Tile_N.webp",
     hasInnRoad = true,
     hasCastle = true
   ),
   Tile(
-    "innsandcathedrals/Inns_And_Cathedrals_C3_Tile_O.png",
+    "innsandcathedrals/Inns_And_Cathedrals_C3_Tile_O.webp",
     hasCastle = true,
     extra = Tile.Extra.Farmhouse
   ),
   Tile(
-    "innsandcathedrals/Inns_And_Cathedrals_C3_Tile_P.png",
+    "innsandcathedrals/Inns_And_Cathedrals_C3_Tile_P.webp",
     hasCastle = true,
     hasShieldCastle = true,
     extra = Tile.Extra.WaterTower
   ),
   Tile(
-    "innsandcathedrals/Inns_And_Cathedrals_C3_Tile_Q.png",
+    "innsandcathedrals/Inns_And_Cathedrals_C3_Tile_Q.webp",
     hasRoad = true,
     hasCastle = true,
     hasShieldCastle = true
@@ -1213,126 +1213,126 @@ private val innsAndCathedralsTiles = listOf(
 
 private val tradersAndBuildersTiles = listOf(
   Tile(
-    "tradersandbuilders/Traders_And_Builders_C3_Tile_A.png",
+    "tradersandbuilders/Traders_And_Builders_C3_Tile_A.webp",
     hasRoad = true,
     hasCastle = true,
     extra = Tile.Extra.Cowshed
   ),
   Tile(
-    "tradersandbuilders/Traders_And_Builders_C3_Tile_B.png",
+    "tradersandbuilders/Traders_And_Builders_C3_Tile_B.webp",
     hasRoad = true,
     extra = Tile.Extra.Highwaymen
   ),
   Tile(
-    "tradersandbuilders/Traders_And_Builders_C3_Tile_C.png",
+    "tradersandbuilders/Traders_And_Builders_C3_Tile_C.webp",
     hasRoad = true,
     hasCastle = true
   ),
   Tile(
-    "tradersandbuilders/Traders_And_Builders_C3_Tile_D.png",
+    "tradersandbuilders/Traders_And_Builders_C3_Tile_D.webp",
     hasRoad = true,
     hasCastle = true,
     hasWheatCastle = true
   ),
   Tile(
-    "tradersandbuilders/Traders_And_Builders_C3_Tile_E.png",
+    "tradersandbuilders/Traders_And_Builders_C3_Tile_E.webp",
     hasRoad = true,
     hasWheatCastle = true
   ),
   Tile(
-    "tradersandbuilders/Traders_And_Builders_C3_Tile_F.png",
+    "tradersandbuilders/Traders_And_Builders_C3_Tile_F.webp",
     hasRoad = true,
     hasWheatCastle = true,
     extra = Tile.Extra.Highwaymen
   ),
   Tile(
-    "tradersandbuilders/Traders_And_Builders_C3_Tile_G.png",
+    "tradersandbuilders/Traders_And_Builders_C3_Tile_G.webp",
     hasWheatCastle = true,
     extra = Tile.Extra.Pigsty
   ),
   Tile(
-    "tradersandbuilders/Traders_And_Builders_C3_Tile_H.png",
+    "tradersandbuilders/Traders_And_Builders_C3_Tile_H.webp",
     hasWheatCastle = true
   ),
   Tile(
-    "tradersandbuilders/Traders_And_Builders_C3_Tile_I.png",
+    "tradersandbuilders/Traders_And_Builders_C3_Tile_I.webp",
     hasRoad = true,
     hasWheatCastle = true,
     extra = Tile.Extra.WaterTower
   ),
   Tile(
-    "tradersandbuilders/Traders_And_Builders_C3_Tile_J.png",
+    "tradersandbuilders/Traders_And_Builders_C3_Tile_J.webp",
     hasMonastery = true
   ),
   Tile(
-    "tradersandbuilders/Traders_And_Builders_C3_Tile_K.png",
+    "tradersandbuilders/Traders_And_Builders_C3_Tile_K.webp",
     hasRoad = true,
     hasClothCastle = true,
     extra = Tile.Extra.Garden
   ),
   Tile(
-    "tradersandbuilders/Traders_And_Builders_C3_Tile_L.png",
+    "tradersandbuilders/Traders_And_Builders_C3_Tile_L.webp",
     hasRoad = true,
     hasCastle = true,
     hasClothCastle = true
   ),
   Tile(
-    "tradersandbuilders/Traders_And_Builders_C3_Tile_M.png",
+    "tradersandbuilders/Traders_And_Builders_C3_Tile_M.webp",
     hasCastle = true,
     hasClothCastle = true
   ),
   Tile(
-    "tradersandbuilders/Traders_And_Builders_C3_Tile_N.png",
+    "tradersandbuilders/Traders_And_Builders_C3_Tile_N.webp",
     hasCastle = true,
     hasClothCastle = true
   ),
   Tile(
-    "tradersandbuilders/Traders_And_Builders_C3_Tile_O.png",
+    "tradersandbuilders/Traders_And_Builders_C3_Tile_O.webp",
     hasRoad = true,
     hasClothCastle = true
   ),
   Tile(
-    "tradersandbuilders/Traders_And_Builders_C3_Tile_P.png",
+    "tradersandbuilders/Traders_And_Builders_C3_Tile_P.webp",
     hasCastle = true,
     hasWineCastle = true
   ),
   Tile(
-    "tradersandbuilders/Traders_And_Builders_C3_Tile_Q.png",
+    "tradersandbuilders/Traders_And_Builders_C3_Tile_Q.webp",
     hasWineCastle = true
   ),
   Tile(
-    "tradersandbuilders/Traders_And_Builders_C3_Tile_R.png",
+    "tradersandbuilders/Traders_And_Builders_C3_Tile_R.webp",
     hasRoad = true,
     hasWineCastle = true
   ),
   Tile(
-    "tradersandbuilders/Traders_And_Builders_C3_Tile_S.png",
+    "tradersandbuilders/Traders_And_Builders_C3_Tile_S.webp",
     hasRoad = true,
     hasWineCastle = true
   ),
   Tile(
-    "tradersandbuilders/Traders_And_Builders_C3_Tile_T.png",
+    "tradersandbuilders/Traders_And_Builders_C3_Tile_T.webp",
     hasWineCastle = true,
     extra = Tile.Extra.Farmhouse
   ),
   Tile(
-    "tradersandbuilders/Traders_And_Builders_C3_Tile_U.png",
+    "tradersandbuilders/Traders_And_Builders_C3_Tile_U.webp",
     hasRoad = true,
     hasWineCastle = true,
     extra = Tile.Extra.Garden
   ),
   Tile(
-    "tradersandbuilders/Traders_And_Builders_C3_Tile_V.png",
+    "tradersandbuilders/Traders_And_Builders_C3_Tile_V.webp",
     hasRoad = true,
     hasWineCastle = true
   ),
   Tile(
-    "tradersandbuilders/Traders_And_Builders_C3_Tile_W.png",
+    "tradersandbuilders/Traders_And_Builders_C3_Tile_W.webp",
     hasRoad = true,
     hasWineCastle = true
   ),
   Tile(
-    "tradersandbuilders/Traders_And_Builders_C3_Tile_X.png",
+    "tradersandbuilders/Traders_And_Builders_C3_Tile_X.webp",
     hasCastle = true,
     hasWineCastle = true,
     extra = Tile.Extra.WaterTower
@@ -1678,146 +1678,146 @@ private val dragonAndFairyTiles = listOf(
 
 private val flyingMachinesTiles = listOf(
   Tile(
-    "flyingmachines/Flier_C3_Tile_A.png",
+    "flyingmachines/Flier_C3_Tile_A.webp",
     hasRoad = true
   ),
   Tile(
-    "flyingmachines/Flier_C3_Tile_B.png",
+    "flyingmachines/Flier_C3_Tile_B.webp",
     hasRoad = true
   ),
   Tile(
-    "flyingmachines/Flier_C3_Tile_C.png",
+    "flyingmachines/Flier_C3_Tile_C.webp",
     hasRoad = true,
     extra = Tile.Extra.Pigsty
   ),
   Tile(
-    "flyingmachines/Flier_C3_Tile_D.png",
+    "flyingmachines/Flier_C3_Tile_D.webp",
     hasRoad = true
   ),
   Tile(
-    "flyingmachines/Flier_C3_Tile_E.png",
+    "flyingmachines/Flier_C3_Tile_E.webp",
     hasRoad = true
   ),
   Tile(
-    "flyingmachines/Flier_C3_Tile_F.png",
+    "flyingmachines/Flier_C3_Tile_F.webp",
     hasRoad = true,
     extra = Tile.Extra.Highwaymen
   ),
   Tile(
-    "flyingmachines/Flier_C3_Tile_G.png",
+    "flyingmachines/Flier_C3_Tile_G.webp",
     extra = Tile.Extra.Farmhouse
   ),
   Tile(
-    "flyingmachines/Flier_C3_Tile_H.png",
+    "flyingmachines/Flier_C3_Tile_H.webp",
     extra = Tile.Extra.Garden
   )
 )
 
 private val messengersTiles = listOf(
   Tile(
-    "messengers/Messages_C3_Tile_A.png"
+    "messengers/Messages_C3_Tile_A.webp"
   ),
   Tile(
-    "messengers/Messages_C3_Tile_B.png"
+    "messengers/Messages_C3_Tile_B.webp"
   ),
   Tile(
-    "messengers/Messages_C3_Tile_C.png"
+    "messengers/Messages_C3_Tile_C.webp"
   ),
   Tile(
-    "messengers/Messages_C3_Tile_D.png"
+    "messengers/Messages_C3_Tile_D.webp"
   ),
   Tile(
-    "messengers/Messages_C3_Tile_E.png"
+    "messengers/Messages_C3_Tile_E.webp"
   ),
   Tile(
-    "messengers/Messages_C3_Tile_F.png"
+    "messengers/Messages_C3_Tile_F.webp"
   ),
   Tile(
-    "messengers/Messages_C3_Tile_G.png"
+    "messengers/Messages_C3_Tile_G.webp"
   ),
   Tile(
-    "messengers/Messages_C3_Tile_H.png"
+    "messengers/Messages_C3_Tile_H.webp"
   )
 )
 
 private val ferriesTiles = listOf(
   Tile(
-    "ferries/Ferries_C3_Tile_01.png",
+    "ferries/Ferries_C3_Tile_01.webp",
     hasRoad = true,
     hasCastle = true
   ),
   Tile(
-    "ferries/Ferries_C3_Tile_01.png",
+    "ferries/Ferries_C3_Tile_01.webp",
     hasRoad = true,
     hasCastle = true
   ),
   Tile(
-    "ferries/Ferries_C3_Tile_01.png",
+    "ferries/Ferries_C3_Tile_01.webp",
     hasRoad = true,
     hasCastle = true
   ),
   Tile(
-    "ferries/Ferries_C3_Tile_02.png",
+    "ferries/Ferries_C3_Tile_02.webp",
     hasRoad = true
   ),
   Tile(
-    "ferries/Ferries_C3_Tile_02.png",
+    "ferries/Ferries_C3_Tile_02.webp",
     hasRoad = true
   ),
   Tile(
-    "ferries/Ferries_C3_Tile_02.png",
+    "ferries/Ferries_C3_Tile_02.webp",
     hasRoad = true
   ),
   Tile(
-    "ferries/Ferries_C3_Tile_03.png",
+    "ferries/Ferries_C3_Tile_03.webp",
     hasRoad = true
   ),
   Tile(
-    "ferries/Ferries_C3_Tile_03.png",
+    "ferries/Ferries_C3_Tile_03.webp",
     hasRoad = true
   )
 )
 
 private val goldminesTiles = listOf(
   Tile(
-    "goldmines/Goldmines_C3_Tile_A.png",
+    "goldmines/Goldmines_C3_Tile_A.webp",
     hasRoad = true,
     extra = Tile.Extra.Cowshed
   ),
   Tile(
-    "goldmines/Goldmines_C3_Tile_B.png",
+    "goldmines/Goldmines_C3_Tile_B.webp",
     hasRoad = true,
     hasCastle = true,
     extra = Tile.Extra.WaterTower
   ),
   Tile(
-    "goldmines/Goldmines_C3_Tile_C.png",
+    "goldmines/Goldmines_C3_Tile_C.webp",
     hasRoad = true,
     hasCastle = true,
     hasMonastery = true
   ),
   Tile(
-    "goldmines/Goldmines_C3_Tile_D.png",
+    "goldmines/Goldmines_C3_Tile_D.webp",
     hasRoad = true,
     hasCastle = true
   ),
   Tile(
-    "goldmines/Goldmines_C3_Tile_E.png",
+    "goldmines/Goldmines_C3_Tile_E.webp",
     hasRoad = true,
     hasMonastery = true
   ),
   Tile(
-    "goldmines/Goldmines_C3_Tile_F.png",
+    "goldmines/Goldmines_C3_Tile_F.webp",
     hasRoad = true,
     extra = Tile.Extra.Highwaymen
   ),
   Tile(
-    "goldmines/Goldmines_C3_Tile_G.png",
+    "goldmines/Goldmines_C3_Tile_G.webp",
     hasCastle = true,
     hasMonastery = true
   ),
   Tile(
-    "goldmines/Goldmines_C3_Tile_H.png",
+    "goldmines/Goldmines_C3_Tile_H.webp",
     hasRoad = true,
     hasMonastery = true
   )
@@ -1825,43 +1825,43 @@ private val goldminesTiles = listOf(
 
 private val mageAndWitchTiles = listOf(
   Tile(
-    "mageandwitch/Mage_And_Witch_C3_Tile_A.png",
+    "mageandwitch/Mage_And_Witch_C3_Tile_A.webp",
     hasRoad = true,
     hasCastle = true
   ),
   Tile(
-    "mageandwitch/Mage_And_Witch_C3_Tile_B.png",
+    "mageandwitch/Mage_And_Witch_C3_Tile_B.webp",
     hasRoad = true,
     hasCastle = true
   ),
   Tile(
-    "mageandwitch/Mage_And_Witch_C3_Tile_C.png",
+    "mageandwitch/Mage_And_Witch_C3_Tile_C.webp",
     hasRoad = true,
     hasCastle = true,
     extra = Tile.Extra.WaterTower
   ),
   Tile(
-    "mageandwitch/Mage_And_Witch_C3_Tile_D.png",
+    "mageandwitch/Mage_And_Witch_C3_Tile_D.webp",
     hasCastle = true
   ),
   Tile(
-    "mageandwitch/Mage_And_Witch_C3_Tile_E.png",
+    "mageandwitch/Mage_And_Witch_C3_Tile_E.webp",
     hasRoad = true,
     hasCastle = true,
     extra = Tile.Extra.Garden
   ),
   Tile(
-    "mageandwitch/Mage_And_Witch_C3_Tile_F.png",
+    "mageandwitch/Mage_And_Witch_C3_Tile_F.webp",
     hasRoad = true,
     hasCastle = true
   ),
   Tile(
-    "mageandwitch/Mage_And_Witch_C3_Tile_G.png",
+    "mageandwitch/Mage_And_Witch_C3_Tile_G.webp",
     hasRoad = true,
     hasCastle = true
   ),
   Tile(
-    "mageandwitch/Mage_And_Witch_C3_Tile_H.png",
+    "mageandwitch/Mage_And_Witch_C3_Tile_H.webp",
     hasRoad = true,
     hasCastle = true,
     extra = Tile.Extra.Farmhouse
@@ -1870,38 +1870,38 @@ private val mageAndWitchTiles = listOf(
 
 private val robbersTiles = listOf(
   Tile(
-    "robbers/Robbers_C3_Tile_A.png",
+    "robbers/Robbers_C3_Tile_A.webp",
     hasRoad = true
   ),
   Tile(
-    "robbers/Robbers_C3_Tile_A.png",
+    "robbers/Robbers_C3_Tile_A.webp",
     hasRoad = true,
     extra = Tile.Extra.Highwaymen
   ),
   Tile(
-    "robbers/Robbers_C3_Tile_C.png",
+    "robbers/Robbers_C3_Tile_C.webp",
     hasRoad = true
   ),
   Tile(
-    "robbers/Robbers_C3_Tile_D.png",
+    "robbers/Robbers_C3_Tile_D.webp",
     hasCastle = true,
     extra = Tile.Extra.Garden
   ),
   Tile(
-    "robbers/Robbers_C3_Tile_E.png",
+    "robbers/Robbers_C3_Tile_E.webp",
     hasRoad = true,
     hasCastle = true
   ),
   Tile(
-    "robbers/Robbers_C3_Tile_F.png",
+    "robbers/Robbers_C3_Tile_F.webp",
     hasRoad = true
   ),
   Tile(
-    "robbers/Robbers_C3_Tile_F.png",
+    "robbers/Robbers_C3_Tile_F.webp",
     hasRoad = true
   ),
   Tile(
-    "robbers/Robbers_C3_Tile_H.png",
+    "robbers/Robbers_C3_Tile_H.webp",
     hasCastle = true,
     extra = Tile.Extra.WaterTower
   )
@@ -1909,30 +1909,30 @@ private val robbersTiles = listOf(
 
 private val cropCircles = listOf(
   Tile(
-    "cropcircles/Crop_Circles_C3_Tile_A.png",
+    "cropcircles/Crop_Circles_C3_Tile_A.webp",
     hasRoad = true
   ),
   Tile(
-    "cropcircles/Crop_Circles_C3_Tile_B.png",
+    "cropcircles/Crop_Circles_C3_Tile_B.webp",
     hasRoad = true
   ),
   Tile(
-    "cropcircles/Crop_Circles_C3_Tile_C.png",
+    "cropcircles/Crop_Circles_C3_Tile_C.webp",
     hasRoad = true,
     hasCastle = true,
     extra = Tile.Extra.Farmhouse
   ),
   Tile(
-    "cropcircles/Crop_Circles_C3_Tile_D.png",
+    "cropcircles/Crop_Circles_C3_Tile_D.webp",
     hasRoad = true,
     hasCastle = true
   ),
   Tile(
-    "cropcircles/Crop_Circles_C3_Tile_E.png",
+    "cropcircles/Crop_Circles_C3_Tile_E.webp",
     hasCastle = true
   ),
   Tile(
-    "cropcircles/Crop_Circles_C3_Tile_F.png",
+    "cropcircles/Crop_Circles_C3_Tile_F.webp",
     hasCastle = true
   )
 )
