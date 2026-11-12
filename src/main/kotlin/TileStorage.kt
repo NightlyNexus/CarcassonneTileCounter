@@ -38,7 +38,12 @@ internal class TileStorage(private val storage: Storage) {
   fun getMessengerTileOrdinalOrder(default: List<Int>): List<Int> {
     if (!isCurrentVersion) return default
     val encodedOrder = storage["messenger_tile_ordinal_order"] ?: return default
-    return encodedOrder.decodeIntList()
+    val order = encodedOrder.decodeIntListOrNull()
+    if (order != null && order.isValidOrderFor(default)) {
+      return order
+    }
+    setMessengerTileOrdinalOrder(default)
+    return default
   }
 
   fun setShown(checkboxElementId: String, checked: Boolean) {
@@ -70,7 +75,13 @@ internal class TileStorage(private val storage: Storage) {
     return builder.toString()
   }
 
-  private fun String.decodeIntList(): List<Int> {
-    return split(',').map { it.toInt() }
+  private fun String.decodeIntListOrNull(): List<Int>? {
+    val parts = split(',')
+    val values = parts.map { it.toIntOrNull() ?: return null }
+    return values
+  }
+
+  private fun List<Int>.isValidOrderFor(default: List<Int>): Boolean {
+    return size == default.size && toSet() == default.toSet()
   }
 }
