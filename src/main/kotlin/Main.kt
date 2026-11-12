@@ -35,7 +35,7 @@ fun main() {
   val sortUsedCheckbox = document.getElementById("sort-used") as HTMLInputElement
   val resetButton = document.getElementById("reset") as HTMLButtonElement
 
-  val shownTilesCount = ShownTilesCount(0, 0)
+  val tileCounts = TileCounts()
 
   val messengersTilesSize = messengersTiles.size
   val messengerTileElements = ArrayList<TileElement>(messengersTilesSize)
@@ -47,17 +47,24 @@ fun main() {
     messengerTileElementPositionsDefault
   ).toMutableList()
   check(messengerTileElementPositions.size == messengersTilesSize)
-  val messengersShownTilesCount = ShownTilesCount(0, 0)
+  val messengersTileCounts = TileCounts()
   val messengerTileElementListener = object : TileElement.Listener {
     override fun onShowChanged(tileElement: TileElement, show: Boolean) {
-      // Do nothing.
+      val used = tileElement.used
+      messengersTileCounts.changeVisibility(
+        used,
+        show
+      )
     }
 
     override fun onUsedChanged(tileElement: TileElement, used: Boolean) {
       if (used) {
-        if (messengersShownTilesCount.used == messengersTilesSize - 1) {
-          messengersShownTilesCount.inPile--
-          messengersShownTilesCount.used++
+        if (messengersTileCounts.usedResettable == messengersTilesSize - 1) {
+          messengersTileCounts.changeUsed(
+            used,
+            tileElement.show,
+            resettable = true
+          )
           for (i in messengersTilesSize - 1 downTo 0) {
             val messengerTileElement = messengerTileElements[i]
             messengerTileElement.used = false
@@ -65,13 +72,20 @@ fun main() {
           return
         }
         messengerTileElements.remove(tileElement)
-        messengerTileElements.add(messengersShownTilesCount.used, tileElement)
-        messengersShownTilesCount.inPile--
-        messengersShownTilesCount.used++
+        messengerTileElements.add(messengersTileCounts.usedResettable, tileElement)
+        messengersTileCounts.changeUsed(
+          used = true,
+          tileElement.show,
+          resettable = true
+        )
       } else {
         messengerTileElements.remove(tileElement)
-        messengersShownTilesCount.used--
-        messengerTileElements.add(messengersShownTilesCount.used, tileElement)
+        messengersTileCounts.changeUsed(
+          used = false,
+          tileElement.show,
+          resettable = true
+        )
+        messengerTileElements.add(messengersTileCounts.usedResettable, tileElement)
       }
       val gridChildren = grid.childNodes
       for (i in messengersTilesSize - 1 downTo 0) {
@@ -86,9 +100,12 @@ fun main() {
       tileStorage.setUsed(tileElement.ordinal, used)
       tileStorage.setMessengerTileOrdinalOrder(messengerTileElementPositions)
 
-      resetButton.disabled = shownTilesCount.used == 1
-        && messengersShownTilesCount.used == 0
-        && messengerTileElementPositions == messengerTileElementPositionsDefault
+      resetButton.disabled = !isResettable(
+        tileCounts,
+        messengersTileCounts,
+        messengerTileElementPositions,
+        messengerTileElementPositionsDefault
+      )
     }
   }
   val messengerTileElementsDefault = ArrayList<TileElement>(messengersTilesSize)
@@ -98,7 +115,7 @@ fun main() {
     grid,
     messengerTileElementsDefault,
     ordinalStart = 0,
-    messengersShownTilesCount,
+    messengersTileCounts,
     messengerTileElementListener,
     tileStorage
   )
@@ -167,21 +184,12 @@ fun main() {
   val tileElementListener = object : TileElement.Listener {
     override fun onShowChanged(tileElement: TileElement, show: Boolean) {
       val used = tileElement.used
-      if (show) {
-        if (used) {
-          shownTilesCount.used++
-        } else {
-          shownTilesCount.inPile++
-        }
-      } else {
-        if (used) {
-          shownTilesCount.used--
-        } else {
-          shownTilesCount.inPile--
-        }
-      }
-      inPileCountDisplay.textContent = shownTilesCount.inPile.toString()
-      usedCountDisplay.textContent = shownTilesCount.used.toString()
+      tileCounts.changeVisibility(
+        used,
+        show
+      )
+      inPileCountDisplay.textContent = tileCounts.inPileShown.toString()
+      usedCountDisplay.textContent = tileCounts.usedShown.toString()
     }
 
     override fun onUsedChanged(tileElement: TileElement, used: Boolean) {
@@ -195,21 +203,22 @@ fun main() {
           grid.appendChild(tileElementToAppend.element)
         }
       }
+      tileCounts.changeUsed(
+        used,
+        tileElement.show,
+        resettable = tileElement.tile.isResettable()
+      )
       if (tileElement.show) {
-        if (used) {
-          shownTilesCount.inPile--
-          shownTilesCount.used++
-        } else {
-          shownTilesCount.inPile++
-          shownTilesCount.used--
-        }
-        inPileCountDisplay.textContent = shownTilesCount.inPile.toString()
-        usedCountDisplay.textContent = shownTilesCount.used.toString()
+        inPileCountDisplay.textContent = tileCounts.inPileShown.toString()
+        usedCountDisplay.textContent = tileCounts.usedShown.toString()
       }
 
-      resetButton.disabled = shownTilesCount.used == 1
-        && messengersShownTilesCount.used == 0
-        && messengerTileElementPositions == messengerTileElementPositionsDefault
+      resetButton.disabled = !isResettable(
+        tileCounts,
+        messengersTileCounts,
+        messengerTileElementPositions,
+        messengerTileElementPositionsDefault
+      )
 
       tileStorage.setUsed(tileElement.ordinal, used)
     }
@@ -231,7 +240,7 @@ fun main() {
       ordinal,
       show,
       used,
-      shownTilesCount,
+      tileCounts,
       tileElementListener
     )
     if (isSource) {
@@ -255,7 +264,7 @@ fun main() {
       ordinal,
       show,
       used,
-      shownTilesCount,
+      tileCounts,
       tileElementListener
     )
     if (isSource) {
@@ -298,7 +307,7 @@ fun main() {
     grid,
     allTileElements,
     ordinal,
-    shownTilesCount,
+    tileCounts,
     tileElementListener,
     tileStorage
   )
@@ -309,7 +318,7 @@ fun main() {
     grid,
     allTileElements,
     ordinal,
-    shownTilesCount,
+    tileCounts,
     tileElementListener,
     tileStorage
   )
@@ -320,7 +329,7 @@ fun main() {
     grid,
     allTileElements,
     ordinal,
-    shownTilesCount,
+    tileCounts,
     tileElementListener,
     tileStorage
   )
@@ -335,7 +344,7 @@ fun main() {
       ordinal,
       show,
       used,
-      shownTilesCount,
+      tileCounts,
       tileElementListener
     )
     if (tile.hasRiver) {
@@ -375,7 +384,7 @@ fun main() {
     grid,
     allTileElements,
     ordinal,
-    shownTilesCount,
+    tileCounts,
     tileElementListener,
     tileStorage
   )
@@ -386,7 +395,7 @@ fun main() {
     grid,
     allTileElements,
     ordinal,
-    shownTilesCount,
+    tileCounts,
     tileElementListener,
     tileStorage
   )
@@ -397,7 +406,7 @@ fun main() {
     grid,
     allTileElements,
     ordinal,
-    shownTilesCount,
+    tileCounts,
     tileElementListener,
     tileStorage
   )
@@ -408,7 +417,7 @@ fun main() {
     grid,
     allTileElements,
     ordinal,
-    shownTilesCount,
+    tileCounts,
     tileElementListener,
     tileStorage
   )
@@ -419,7 +428,7 @@ fun main() {
     grid,
     allTileElements,
     ordinal,
-    shownTilesCount,
+    tileCounts,
     tileElementListener,
     tileStorage
   )
@@ -430,17 +439,20 @@ fun main() {
     grid,
     allTileElements,
     ordinal,
-    shownTilesCount,
+    tileCounts,
     tileElementListener,
     tileStorage
   )
 
-  inPileCountDisplay.textContent = shownTilesCount.inPile.toString()
-  usedCountDisplay.textContent = shownTilesCount.used.toString()
+  inPileCountDisplay.textContent = tileCounts.inPileShown.toString()
+  usedCountDisplay.textContent = tileCounts.usedShown.toString()
 
-  resetButton.disabled = shownTilesCount.used == 1
-    && messengersShownTilesCount.used == 0
-    && messengerTileElementPositions == messengerTileElementPositionsDefault
+  resetButton.disabled = !isResettable(
+    tileCounts,
+    messengersTileCounts,
+    messengerTileElementPositions,
+    messengerTileElementPositionsDefault
+  )
 
   // This does not call sortUsedCheckbox's change event listener, so we have to do an initial sort.
   sortUsedCheckbox.checked = sortUsed
@@ -454,7 +466,90 @@ fun main() {
   }
 }
 
-private class ShownTilesCount(var inPile: Int, var used: Int)
+private fun isResettable(
+  tileCounts: TileCounts,
+  messengersTileCounts: TileCounts,
+  messengerTileElementPositions: List<Int>,
+  messengerTileElementPositionsDefault: List<Int>
+): Boolean {
+  return tileCounts.usedResettable != 0
+    || messengersTileCounts.usedResettable != 0
+    || messengerTileElementPositions != messengerTileElementPositionsDefault
+}
+
+private fun Tile.isResettable(): Boolean {
+  // Source tiles are always used.
+  return extra !== Tile.Extra.Source
+}
+
+private class TileCounts {
+  // The number of tiles that are used and are not source tiles.
+  var usedResettable: Int = 0
+    private set
+  var usedShown: Int = 0
+    private set
+  var inPileShown: Int = 0
+    private set
+
+  fun addTile(
+    show: Boolean,
+    used: Boolean,
+    resettable: Boolean
+  ) {
+    if (used && resettable) {
+      usedResettable++
+    }
+    if (show) {
+      if (used) {
+        usedShown++
+      } else {
+        inPileShown++
+      }
+    }
+  }
+
+  fun changeVisibility(
+    used: Boolean,
+    show: Boolean
+  ) {
+    if (used) {
+      if (show) {
+        usedShown++
+      } else {
+        usedShown--
+      }
+    } else {
+      if (show) {
+        inPileShown++
+      } else {
+        inPileShown--
+      }
+    }
+  }
+
+  fun changeUsed(
+    used: Boolean,
+    show: Boolean,
+    resettable: Boolean
+  ) {
+    if (resettable) {
+      if (used) {
+        usedResettable++
+      } else {
+        usedResettable--
+      }
+    }
+    if (show) {
+      if (used) {
+        usedShown++
+        inPileShown--
+      } else {
+        usedShown--
+        inPileShown++
+      }
+    }
+  }
+}
 
 private fun Document.createTiles(
   tiles: List<Tile>,
@@ -462,7 +557,7 @@ private fun Document.createTiles(
   grid: Element,
   allTileElements: MutableList<TileElement>,
   ordinalStart: Int,
-  shownTilesCount: ShownTilesCount,
+  tileCounts: TileCounts,
   tileElementListener: TileElement.Listener,
   tileStorage: TileStorage
 ): Int {
@@ -476,7 +571,7 @@ private fun Document.createTiles(
       ordinal,
       show,
       used,
-      shownTilesCount,
+      tileCounts,
       tileElementListener
     )
     tileElements += tileElement
@@ -503,16 +598,14 @@ private fun Element.createTile(
   ordinal: Int,
   show: Boolean,
   used: Boolean,
-  shownTilesCount: ShownTilesCount,
+  tileCounts: TileCounts,
   listener: TileElement.Listener
 ): TileElement {
-  if (show) {
-    if (used) {
-      shownTilesCount.used++
-    } else {
-      shownTilesCount.inPile++
-    }
-  }
+  tileCounts.addTile(
+    show,
+    used,
+    resettable = tile.isResettable()
+  )
   return TileElement(
     tile,
     ownerDocument!!,
