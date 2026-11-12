@@ -27,6 +27,12 @@
       margin: 0;
     }
 
+    #grid-container > figure > img {
+        width: 110px;
+        aspect-ratio: 1;
+        object-fit: contain;
+    }
+
     body {
       margin: 0;
       container-type: inline-size;
@@ -56,6 +62,12 @@
       display: inline-block;
     }
 
+    .checkbox-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.25em;
+    }
+
     @media (prefers-color-scheme: dark) {
       #header {
         background-color: #000000DD;
@@ -82,56 +94,88 @@
 <div id="header">
   <p>In pile: </p><b id="in-pile-count"></b>&nbsp;&nbsp;&nbsp;&nbsp;<p>Used: </p><b id="used-count"></b>
   <br/><br/>
-  <input type="checkbox" id="sort-used">
-  <label for="sort-used">Move used to bottom</label>&nbsp;&nbsp;&nbsp;&nbsp;<button id="reset">Reset</button>
+  <label class="checkbox-label">
+    <input type="checkbox" id="sort-used">
+    <span>Move used to bottom</span>
+  </label>&nbsp;&nbsp;&nbsp;&nbsp;<button id="reset">Reset</button>
   <br/><br/>
   <div class="expansion">
-    <input type="checkbox" id="base" disabled="disabled" checked="checked">
-    <label for="base">Base</label>
+    <label class="checkbox-label">
+      <input type="checkbox" id="base" disabled="disabled" checked="checked">
+      <span>Base</span>
+    </label>
   </div>
   <div class="expansion">
-    <input type="checkbox" id="river" checked="checked">
-    <label for="river">River</label>
+    <label class="checkbox-label">
+      <input type="checkbox" id="river" checked="checked">
+      <span>River</span>
+    </label>
   </div>
   <div class="expansion">
-    <input type="checkbox" id="inns-and-cathedrals" checked="checked">
-    <label for="inns-and-cathedrals">Inns &amp; Cathedrals</label>
+    <label class="checkbox-label">
+      <input type="checkbox" id="inns-and-cathedrals" checked="checked">
+      <span>Inns &amp; Cathedrals</span>
+    </label>
   </div>
   <div class="expansion">
-    <input type="checkbox" id="traders-and-builders" checked="checked">
-    <label for="traders-and-builders">Traders &amp; Builders</label>
+    <label class="checkbox-label">
+      <input type="checkbox" id="traders-and-builders" checked="checked">
+      <span>Traders &amp; Builders</span>
+    </label>
   </div>
   <div class="expansion">
-    <input type="checkbox" id="princess-and-dragon" checked="checked">
-    <label for="princess-and-dragon">Princess &amp; Dragon</label>
+    <label class="checkbox-label">
+      <input type="checkbox" id="princess-and-dragon" checked="checked">
+      <span>Princess &amp; Dragon</span>
+    </label>
   </div>
   <div class="expansion">
-    <input type="checkbox" id="flying-machines" checked="checked">
-    <label for="flying-machines">Flying Machines</label>
+    <label class="checkbox-label">
+      <input type="checkbox" id="dragon-and-fairy" checked="checked">
+      <span>Dragon &amp; Fairy</span>
+    </label>
   </div>
   <div class="expansion">
-    <input type="checkbox" id="messengers" checked="checked">
-    <label for="messengers">Messengers</label>
+    <label class="checkbox-label">
+      <input type="checkbox" id="flying-machines" checked="checked">
+      <span>Flying Machines</span>
+    </label>
   </div>
   <div class="expansion">
-    <input type="checkbox" id="ferries" checked="checked">
-    <label for="ferries">Ferries</label>
+    <label class="checkbox-label">
+      <input type="checkbox" id="messengers" checked="checked">
+      <span>Messengers</span>
+    </label>
   </div>
   <div class="expansion">
-    <input type="checkbox" id="goldmines" checked="checked">
-    <label for="goldmines">Goldmines</label>
+    <label class="checkbox-label">
+      <input type="checkbox" id="ferries" checked="checked">
+      <span>Ferries</span>
+    </label>
   </div>
   <div class="expansion">
-    <input type="checkbox" id="mage-and-witch" checked="checked">
-    <label for="mage-and-witch">Mage &amp; Witch</label>
+    <label class="checkbox-label">
+      <input type="checkbox" id="goldmines" checked="checked">
+      <span>Goldmines</span>
+    </label>
   </div>
   <div class="expansion">
-    <input type="checkbox" id="robbers" checked="checked">
-    <label for="robbers">Robbers</label>
+    <label class="checkbox-label">
+      <input type="checkbox" id="mage-and-witch" checked="checked">
+      <span>Mage &amp; Witch</span>
+    </label>
   </div>
   <div class="expansion">
-    <input type="checkbox" id="crop-circles" checked="checked">
-    <label for="crop-circles">Crop Circles</label>
+    <label class="checkbox-label">
+      <input type="checkbox" id="robbers" checked="checked">
+      <span>Robbers</span>
+    </label>
+  </div>
+  <div class="expansion">
+    <label class="checkbox-label">
+      <input type="checkbox" id="crop-circles" checked="checked">
+      <span>Crop Circles</span>
+    </label>
   </div>
 </div>
 <div id="grid-container"></div>
