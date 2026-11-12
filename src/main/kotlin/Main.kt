@@ -146,11 +146,14 @@ fun main() {
       messengerTileElements.sortBy {
         it.ordinal
       }
-      resetButton.disabled = true
-      for (i in 0 until messengersTilesSize) {
-        grid.insertBefore(messengerTileElements[i].element, firstChild)
+      messengerTileElementPositions.clear()
+      for (messengerTileElement in messengerTileElements) {
+        grid.insertBefore(messengerTileElement.element, firstChild)
+        messengerTileElementPositions += messengerTileElement.ordinal
       }
       tileStorage.setMessengerTileOrdinalOrder(messengerTileElementPositionsDefault)
+
+      resetButton.disabled = true
     }
   })
 
