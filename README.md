@@ -5,7 +5,7 @@ Mark Carcassonne tiles as used as you play, so you know what is still in the dec
 The tiles try to follow the 3rd Edition of Carcassonne.<br/>
 The tile scans are from https://wikicarpedia.com/
 
-![webpage example](webpage_example.png)
+![webpage example](webpage_example.webp)
 
 License
 --------
